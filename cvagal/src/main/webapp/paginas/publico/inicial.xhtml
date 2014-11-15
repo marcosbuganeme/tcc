@@ -3,11 +3,24 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf/"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:composition template="/WEB-INF/template/template.xhtml">
-	
+
+		<ui:define name="login">
+			<div class="row">
+				<div class="col-xs-12">
+					<p:inputText id="txtUsuario" placeholder="Entre com o email de usuário" styleClass="linhaLargura" />
+				</div>
+				<div class="col-xs-12">
+					<p:password id="txtSenha" placeholder="Insira uma senha" styleClass="linhaLargura" />
+				</div>
+				<h:commandButton value="#{msg['botao.salvar']}" styleClass="btn btn-warning" />
+			</div>
+		</ui:define>
+		
 		<ui:define name="titulo_conteudo">
 			<h:inputText styleClass="linhaPesquisa" />
 			<h:commandButton id="btnPesquisar" value="#{msg['botao.pesquisar']}"

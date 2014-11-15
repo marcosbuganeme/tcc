@@ -37,6 +37,9 @@ public class ControleVaga implements Serializable {
 	/** Atributo colecaoVagas. */
 	private Collection<Vaga> colecaoVagas;
 
+	/** Atributo isApresentarLogin. */
+	private boolean isApresentarLogin;
+
 	/**
 	 * Responsável pela criação de novas instâncias desta classe.
 	 */
@@ -44,6 +47,12 @@ public class ControleVaga implements Serializable {
 
 	}
 
+	/**
+	 * Método responsável por carregar o relatório de vagas disponíveis.
+	 *
+	 * @author marcosbuganeme
+	 *
+	 */
 	@PostConstruct
 	public void carregarRelatorio() {
 
@@ -64,7 +73,27 @@ public class ControleVaga implements Serializable {
 	 */
 	public Collection<Vaga> getColecaoVagas() {
 
-		return colecaoVagas;
+		return this.colecaoVagas;
+	}
+
+	/**
+	 * Retorna o valor do atributo <code>isApresentarLogin</code>
+	 *
+	 * @return <code>boolean</code>
+	 */
+	public boolean isApresentarLogin() {
+
+		return this.isApresentarLogin;
+	}
+
+	/**
+	 * Define o valor do atributo <code>isApresentarLogin</code>.
+	 *
+	 * @param isApresentarLogin
+	 */
+	public void setApresentarLogin(final boolean isApresentarLogin) {
+
+		this.isApresentarLogin = isApresentarLogin;
 	}
 
 }
