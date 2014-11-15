@@ -38,14 +38,6 @@
 
 	</welcome-file-list>
 
-	<context-param>
-
-		<param-name>primefaces.THEME</param-name>
-
-		<param-value>bootstrap</param-value>
-
-	</context-param>
-
 	<!-- Implementação do CDI com WELD -->
 	<listener>
 
