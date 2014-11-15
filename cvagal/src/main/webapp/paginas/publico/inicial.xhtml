@@ -5,8 +5,16 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
-<h:head></h:head>
-<body>
+	<ui:composition template="/template/template.xhtml">
+	
+		<ui:define name="titulo_conteudo">
+			<h:outputText value="titulo do conteudo" />
+		</ui:define>
 
-</body>
+		<ui:define name="conteudo">
+			<h:outputText value="conteudo" />
+		</ui:define>
+	
+	</ui:composition>
+
 </html>
