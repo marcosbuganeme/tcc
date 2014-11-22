@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:form>
+	<div class="container">
+		<div class="container-fluid">
+			<nav class="navbar navbar-fixed-top navbar-default" role="navigation">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar" />
+						<span class="icon-bar" />
+						<span class="icon-bar" />
+					</button>
+					<a class="navbar-brand" href="#{facesContext.externalContext.requestContextPath}/paginas/restrito/sistema.xhtml">
+						<span class="fontePreta">#{msg['navbar.titulo.sistema']}</span>
+					</a>
+				</div>
+
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav">
+						<li>
+							<h:link value="#{msg['navbar.menu.home']}" outcome="/paginas/restrito/sistema" />
+						</li>
+
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<span>#{msg['navbar.menu.relatorio']}<span class="caret" /></span>
+							</a>
+
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<h:link value="#{msg['navbar.submenu.relatorio.vagas']}" outcome="/paginas/restrito/relatorio/vaga/detalhar" />
+								</li>
+							</ul>
+						</li>
+
+						<li class="dropdown" jsf:rendered="#{manterUsuarioLogadoControle.supervisor}">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								<span>#{msg['navbar.menu.administrativo.cadastro']}<span class="caret" /></span>
+							</a>
+
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<h:link value="#{msg['navbar.submenu.administrativo.cadastro.usuario']}"
+										outcome="/paginas/restrito/cadastro/usuario/incluir" />
+								</li>
+
+								<li>
+									<h:link value="#{msg['navbar.submenu.administrativo.cadastro.permissao']}"
+										outcome="/paginas/restrito/cadastro/permissao/incluir" />
+								</li>
+
+								<li>
+									<h:link value="#{msg['navbar.submenu.administrativo.cadastro.empresa']}"
+										outcome="/paginas/restrito/cadastro/empresa/incluir" />
+								</li>
+
+								<li>
+									<h:link value="#{msg['navbar.submenu.administrativo.cadastro.vaga']}"
+										outcome="/paginas/restrito/cadastro/vaga/incluir" />
+								</li>
+							</ul>
+						</li>
+
+						<li jsf:rendered="#{!manterUsuarioLogadoControle.supervisor}">
+							<h:link value="#{msg['navbar.submenu.administrativo.cadastro.vaga']}"
+								outcome="/paginas/restrito/cadastro/vaga/incluir" />
+						</li>
+					</ul>
+
+					<ul class="nav navbar-nav navbar-right">
+						<li style="margin-top: 15px">
+							<span>#{msg['navbar.label.boasvindas']}
+								<small>#{manterUsuarioLogadoControle.nomeUsuarioLogado}</small>
+							</span>
+						</li>
+
+						<li>
+							<a href="#{facesContext.externalContext.requestContextPath}/j_spring_security_logout">#{msg['navbar.sair']}</a>
+						</li>
+					</ul>
+				</div>
+			</nav>
+		</div>
+	</div>
+</h:form>
+
+</html>

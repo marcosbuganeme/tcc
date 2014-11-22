@@ -1,7 +1,41 @@
-.linhaPesquisa {
+@CHARSET "UTF-8";
+
+.larguraMaxima {
 	width: 100% !important;
 }
 
-.linhaLargura {
+.ui-autocomplete {
 	width: 100% !important;
+}
+
+input {
+	width: 100% !important;
+}
+
+.espacamentoLogin {
+	height: 2% !important;
+}
+
+.label {
+	color: black !important;
+}
+
+.ajax-status-template-inicial {
+	width: 35px;
+	height: 35px;
+	position: fixed;
+	right: 600px;
+	top: 274px;
+}
+
+.ajax-status-template-sistema {
+	width: 35px;
+	height: 35px;
+	position: fixed;
+	right: 50px;
+	top: 100px;
+}
+
+.fontePreta {
+	color: black !important;	
 }

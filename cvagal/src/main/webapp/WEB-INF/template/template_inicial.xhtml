@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:head>
+		<meta name="description" content="Cvagal!" />
+
+		<meta name="author" content="Marcos Olavo Silva Buganeme" />
+
+		<meta name="author" content="Leides Rodrigues de Oliveira" />
+
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<h:outputStylesheet library="css" name="bootstrap.min.css" />
+
+		<h:outputStylesheet library="css" name="cvagal.css" />
+
+		<title>
+			<ui:insert name="titulo">Cvagal</ui:insert>
+		</title>
+	</h:head>
+
+	<h:body>
+
+		<p:ajaxStatus styleClass="ajax-status-template-inicial">
+			<f:facet name="start">
+				<h:graphicImage library="img" name="loading.gif" />
+			</f:facet>
+
+			<f:facet name="complete">
+				<h:outputText value="" />
+			</f:facet>
+		</p:ajaxStatus>
+
+		<p:growl autoUpdate="true" showSummary="true" life="5000" />
+
+		<div class="container">
+			<div class="page-header">
+				<div class="jumbotron">
+					<ui:insert name="login" />
+				</div>
+			</div>
+		
+			<div class="container-fluid">
+				<ui:insert name="corpo" />
+			</div>
+
+			<p:spacer height="50" />
+
+			<footer>
+				Software desenvolvido para o tcc da pós senac
+			</footer>
+		</div>
+		<h:outputScript library="js" name="bootstrap.min.js" />			
+	</h:body>
+</html>
