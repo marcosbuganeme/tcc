@@ -6,12 +6,14 @@ package br.com.cvagal.excecoes;
  * </p>
  *
  * <p>
- * <b>Descrição:</b> Classe responsável pelo tratamento de exceções que quebram as regras de negócio vinculadas a uma entidade.
+ * <b>Descrição:</b>
  * </p>
  *
- * Data de criação: 19/11/2014
+ * Data de criação: 22/11/2014
  *
  * @author marcosbuganeme
+ *
+ * @author Leides Rodrigues
  *
  * @version 1.0.0
  */

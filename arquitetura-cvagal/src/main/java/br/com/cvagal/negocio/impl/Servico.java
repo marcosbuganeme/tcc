@@ -1,8 +1,13 @@
 package br.com.cvagal.negocio.impl;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import br.com.cvagal.excecoes.RegistroNaoExisteException;
 import br.com.cvagal.filtro.FiltroLazy;
 import br.com.cvagal.modelo.Entidade;
 import br.com.cvagal.negocio.ServicoFacade;
@@ -34,6 +39,12 @@ public abstract class Servico<E extends Entidade> implements ServicoFacade<E> {
 	/** Constante serialVersionUID. */
 	private static final long serialVersionUID = -2115726914896345572L;
 
+	/** Constante LOG. */
+	private static final Log LOG = LogFactory.getLog(Servico.class);
+
+	/** Constante MENSAGEM_REGISTRO_NAO_EXISTE. */
+	private static final String MENSAGEM_REGISTRO_NAO_EXISTE = "registro.nao.existe";
+
 	/**
 	 * Método responsável por obter o dao da entidade manipulada.
 	 *
@@ -42,6 +53,21 @@ public abstract class Servico<E extends Entidade> implements ServicoFacade<E> {
 	 * @return <i>o dao da entidade manipulada</i>.
 	 */
 	public abstract DAO<E> getDAO();
+
+	@Override
+	public E obter(final Serializable id) {
+
+		final E entidadeObtida = this.getDAO().obter(id);
+
+		if (entidadeObtida == null) {
+
+			Servico.LOG.error("Registro não encontrado");
+
+			throw new RegistroNaoExisteException(Servico.MENSAGEM_REGISTRO_NAO_EXISTE);
+		}
+
+		return entidadeObtida;
+	}
 
 	@Override
 	@Transacao
@@ -80,7 +106,7 @@ public abstract class Servico<E extends Entidade> implements ServicoFacade<E> {
 	}
 
 	@Override
-	public List<E> listar(final FiltroLazy filtro) {
+	public List<E> listar(final FiltroLazy<E> filtro) {
 
 		return this.getDAO().listar(filtro);
 	}

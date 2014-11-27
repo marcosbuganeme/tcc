@@ -52,7 +52,7 @@ public class UsuarioHibernateDAO extends HibernateDAO<Usuario> implements Usuari
 	}
 
 	@Override
-	public void adicionarRestricaoLazy(Criteria criteria, FiltroLazy filtro) {
+	public void adicionarRestricaoLazy(final Criteria criteria, final FiltroLazy<Usuario> filtro) {
 
 	}
 
@@ -61,6 +61,7 @@ public class UsuarioHibernateDAO extends HibernateDAO<Usuario> implements Usuari
 	 *
 	 * @return <code>EntityManager</code>
 	 */
+	@Override
 	public EntityManager getEntityManager() {
 
 		return this.entityManager;

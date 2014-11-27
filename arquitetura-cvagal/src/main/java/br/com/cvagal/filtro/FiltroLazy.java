@@ -2,6 +2,8 @@ package br.com.cvagal.filtro;
 
 import java.io.Serializable;
 
+import br.com.cvagal.modelo.Entidade;
+
 /**
  * <p>
  * <b>Título:</b> FiltroLazy.java
@@ -19,13 +21,16 @@ import java.io.Serializable;
  *
  * @version 1.0.0
  */
-public class FiltroLazy implements Serializable {
+public class FiltroLazy<E extends Entidade> implements Serializable {
 
 	/** Constante serialVersionUID. */
 	private static final long serialVersionUID = -1642456600723662156L;
 
 	/** Atributo palavraChave. */
 	private String palavraChave;
+
+	/** Atributo objetoFiltro. */
+	private E objetoFiltro;
 
 	/** Atributo primeiroRegistro. */
 	private int primeiroRegistro;
@@ -137,6 +142,26 @@ public class FiltroLazy implements Serializable {
 	public void setAscendente(final boolean isAscendente) {
 
 		this.isAscendente = isAscendente;
+	}
+
+	/**
+	 * Retorna o valor do atributo <code>objetoFiltro</code>
+	 *
+	 * @return <code>E</code>
+	 */
+	public E getObjetoFiltro() {
+
+		return this.objetoFiltro;
+	}
+
+	/**
+	 * Define o valor do atributo <code>objetoFiltro</code>.
+	 *
+	 * @param objetoFiltro
+	 */
+	public void setObjetoFiltro(final E objetoFiltro) {
+
+		this.objetoFiltro = objetoFiltro;
 	}
 
 }

@@ -24,18 +24,6 @@ import br.com.cvagal.modelo.Vaga;
 public interface VagaDAO extends DAO<Vaga> {
 
 	/**
-	 * Método responsável por obter a descricao da vaga.
-	 *
-	 * @author marcosbuganeme
-	 *
-	 * @param descricao
-	 *            - do cargo.
-	 * 
-	 * @return <i>vaga consultada</i>.
-	 */
-	Vaga obterVagaPorDescricao(final String descricao);
-
-	/**
 	 * Método responsável por obter uma lista de vagas através do filtro.
 	 *
 	 * @author marcosbuganeme

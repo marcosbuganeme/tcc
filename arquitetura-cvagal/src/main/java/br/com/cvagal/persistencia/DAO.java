@@ -90,7 +90,7 @@ public interface DAO<E extends Entidade> extends Serializable {
 	 * 
 	 * @return <i>lista dos dados da entidade</i>.
 	 */
-	List<E> listar(final FiltroLazy filtro);
+	List<E> listar(final FiltroLazy<E> filtro);
 
 	/**
 	 * Método responsável por obter a quantidade de registros na consulta.
@@ -102,5 +102,5 @@ public interface DAO<E extends Entidade> extends Serializable {
 	 * 
 	 * @return <i>quantidade de registros</i>.
 	 */
-	int quantidadeRegistros(final FiltroLazy filtro);
+	int quantidadeRegistros(final FiltroLazy<E> filtro);
 }

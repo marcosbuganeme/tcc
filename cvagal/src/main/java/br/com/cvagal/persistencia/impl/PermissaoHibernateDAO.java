@@ -57,7 +57,7 @@ public class PermissaoHibernateDAO extends HibernateDAO<Permissao> implements Pe
 	}
 
 	@Override
-	public void adicionarRestricaoLazy(final Criteria criteria, final FiltroLazy filtro) {
+	public void adicionarRestricaoLazy(final Criteria criteria, final FiltroLazy<Permissao> filtro) {
 
 	}
 

@@ -47,7 +47,7 @@ public abstract class Formulario<E extends Entidade> implements Serializable {
 	private LazyDataModel<E> modelo;
 
 	/** Atributo filtro. */
-	private FiltroLazy filtro;
+	private FiltroLazy<E> filtro;
 
 	/** Atributo palavraChave. */
 	private String palavraChave;
@@ -143,7 +143,7 @@ public abstract class Formulario<E extends Entidade> implements Serializable {
 	 *
 	 * @return <code>FiltroLazy</code>
 	 */
-	public FiltroLazy getFiltro() {
+	public FiltroLazy<E> getFiltro() {
 
 		return this.filtro;
 	}
@@ -153,7 +153,7 @@ public abstract class Formulario<E extends Entidade> implements Serializable {
 	 *
 	 * @param filtro
 	 */
-	public void setFiltro(final FiltroLazy filtro) {
+	public void setFiltro(final FiltroLazy<E> filtro) {
 
 		this.filtro = filtro;
 	}

@@ -1,6 +1,5 @@
 package br.com.cvagal.controle;
 
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -73,10 +72,10 @@ public class VagaControle extends ManutencaoController<Vaga> {
 	 * 
 	 * @return <i>lista de vagas</i>.
 	 */
-	public Collection<Vaga> autoCompleteVaga(final String filtro) {
+	public List<Vaga> autoCompleteVaga(final String filtro) {
 
 		this.getFormulario().setPalavraChave(new String(filtro));
-
+		
 		return this.getService().autoCompleteVaga(filtro);
 	}
 
@@ -84,7 +83,7 @@ public class VagaControle extends ManutencaoController<Vaga> {
 	@Override
 	public void iniciarDados() {
 
-		this.getFormulario().setFiltro(new FiltroLazy());
+		this.getFormulario().setFiltro(new FiltroLazy<Vaga>());
 
 		VagaControle.this.getFormulario().setModelo(new LazyDataModel<Vaga>() {
 

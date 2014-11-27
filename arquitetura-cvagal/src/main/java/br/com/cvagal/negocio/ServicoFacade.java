@@ -30,6 +30,18 @@ import br.com.cvagal.modelo.Entidade;
 public interface ServicoFacade<E extends Entidade> extends Serializable {
 
 	/**
+	 * Método responsável por obter uma entidade através de seu identificador.
+	 *
+	 * @author marcosbuganeme
+	 *
+	 * @param id
+	 *            - identificador da entidade.
+	 * 
+	 * @return <i>entidade pesquisada</i>.
+	 */
+	E obter(final Serializable id);
+
+	/**
 	 * Método responsável por salvar uma entidade.
 	 *
 	 * @author marcosbuganeme
@@ -78,5 +90,5 @@ public interface ServicoFacade<E extends Entidade> extends Serializable {
 	 * 
 	 * @return <i>lista de dados da entidade</i>.
 	 */
-	List<E> listar(final FiltroLazy filtro);
+	List<E> listar(final FiltroLazy<E> filtro);
 }

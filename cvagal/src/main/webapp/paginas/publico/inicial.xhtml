@@ -77,24 +77,23 @@
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="col-xs-8">
-							<p:autoComplete id="atCompletePesquisa" value="#{vagaControle.formulario.filtro.palavraChave}"
+							<p:autoComplete id="atCompletePesquisa" value="#{vagaControle.formulario.filtro.objetoFiltro}"
 								completeMethod="#{vagaControle.autoCompleteVaga}" forceSelection="true"
-								var="v" itemLabel="#{v.descricao}" itemValue="#{v}"
+								var="v" itemLabel="#{v.sku}" itemValue="#{v}"
 								placeholder="#{msg['placeholder.input.pesquisa.lazy']}"
 								converter="br.com.cvgal.conversor.conversorVaga" />
 						</div>
 
 						<div class="col-xs-2">
-							<h:commandButton id="btnPesquisar" value="#{msg['botao.pesquisar']}"
-								styleClass="btn" >
-								<f:ajax execute="@form" render="dtVaga" />
-							</h:commandButton>
+							<p:commandButton id="btnPesquisar" value="#{msg['botao.pesquisar']}" update="dtVaga"
+								process="@this" styleClass="btn">
+								<p:resetInput target="atCompletePesquisa" />
+							</p:commandButton>
 						</div>
 
 						<div class="col-xs-2">
-							<h:commandButton value="#{msg['botao.limpar']}"	styleClass="btn">
-								<f:ajax execute="@form" render="dtVaga" listener="#{vagaControle.resetarDados()}" />
-							</h:commandButton>
+							<p:commandButton value="#{msg['botao.limpar']}" actionListener="#{vagaControle.resetarDados()}"
+								update="@form" process="@this" styleClass="btn" />
 						</div>									
 					</div><!-- div_xs_12 -->
 				</div><!-- div_row -->
@@ -107,7 +106,7 @@
 							<p:dataTable id="dtVaga" value="#{vagaControle.formulario.modelo}" var="v" lazy="true"
 								paginator="true" paginatorPosition="bottom" rows="5" paginatorAlwaysVisible="false"
 								rowsPerPageLabel="#{msg['dt.numeroregistros']}" rowsPerPageTemplate="5, 10, 15, 30, 50"
-								emptyMessage="#{msg['dt.emptyMessage']}">
+								emptyMessage="#{msg['dt.emptyMessage']}" styleClass="table table-hover">
 
 								<p:column headerText="#{msg['label.identificador']}">
 									<h:outputText value="#{v.identificador}" />				
@@ -122,7 +121,9 @@
 								</p:column>
 
 								<p:column headerText="#{msg['label.salario']}" sortBy="#{v.salario}">
-									<h:outputText value="R$ #{v.salario}" />
+									<h:outputText value="R$ #{v.salario}">
+										<f:convertNumber currencySymbol="R$" maxFractionDigits="2" locale="pt_BR"/>
+									</h:outputText>
 								</p:column>
 							</p:dataTable>
 						</div><!-- div_table_responsive -->

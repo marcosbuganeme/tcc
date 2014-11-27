@@ -35,13 +35,7 @@ public class VagaServico extends Servico<Vaga> implements VagaServicoFacade {
 	private VagaDAO dao;
 
 	@Override
-	public Vaga obterVagaPorDescricao(String descricao) {
-
-		return this.getDAO().obterVagaPorDescricao(descricao);
-	}
-
-	@Override
-	public List<Vaga> autoCompleteVaga(String palavraFiltrada) {
+	public List<Vaga> autoCompleteVaga(final String palavraFiltrada) {
 
 		return this.getDAO().autoCompleteVaga(palavraFiltrada);
 	}

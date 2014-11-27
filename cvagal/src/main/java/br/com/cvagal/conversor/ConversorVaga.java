@@ -8,21 +8,21 @@ import javax.faces.convert.FacesConverter;
 import org.apache.commons.lang3.StringUtils;
 
 import br.com.cvagal.modelo.Vaga;
-import br.com.cvagal.persistencia.VagaDAO;
+import br.com.cvagal.negocio.UsuarioServicoFacade;
 import br.com.cvagal.utilitarios.cdi.CDIServiceLocator;
 
 @FacesConverter("br.com.cvgal.conversor.conversorVaga")
 public class ConversorVaga implements Converter {
 
-	/** Atributo dao. */
-	private final VagaDAO dao;
+	/** Atributo servicoFacade. */
+	private final UsuarioServicoFacade servicoFacade;
 
 	/**
 	 * Responsável pela criação de novas instâncias desta classe.
 	 */
 	public ConversorVaga() {
 
-		this.dao = CDIServiceLocator.getBean(VagaDAO.class);
+		this.servicoFacade = CDIServiceLocator.getBean(UsuarioServicoFacade.class);
 	}
 
 	/**
@@ -36,11 +36,13 @@ public class ConversorVaga implements Converter {
 	@Override
 	public Object getAsObject(final FacesContext context, final UIComponent component, final String value) {
 
-		Vaga vagaRetornada = null;
+		final Vaga vagaRetornada = null;
 
 		if (StringUtils.isNotEmpty(value)) {
 
-			vagaRetornada = this.dao.obterVagaPorDescricao(value);
+			final Long id = new Long(value);
+
+			this.servicoFacade.obter(id);
 		}
 
 		return vagaRetornada;

@@ -109,7 +109,7 @@ public abstract class HibernateDAO<E extends Entidade> implements DAO<E> {
 	}
 
 	@Override
-	public List<E> listar(final FiltroLazy filtro) {
+	public List<E> listar(final FiltroLazy<E> filtro) {
 
 		final Criteria criteria = this.obterCriteria();
 
@@ -127,7 +127,7 @@ public abstract class HibernateDAO<E extends Entidade> implements DAO<E> {
 	}
 
 	@Override
-	public int quantidadeRegistros(final FiltroLazy filtro) {
+	public int quantidadeRegistros(final FiltroLazy<E> filtro) {
 
 		final Criteria criteria = this.obterCriteria();
 
@@ -149,7 +149,7 @@ public abstract class HibernateDAO<E extends Entidade> implements DAO<E> {
 	 * @param filtro
 	 *            - filtro da consulta.
 	 */
-	public abstract void adicionarRestricaoLazy(final Criteria criteria, final FiltroLazy filtro);
+	public abstract void adicionarRestricaoLazy(final Criteria criteria, final FiltroLazy<E> filtro);
 
 	/**
 	 * Método responsável por adicionar paginação a consulta.
@@ -162,7 +162,7 @@ public abstract class HibernateDAO<E extends Entidade> implements DAO<E> {
 	 * @param filtro
 	 *            - filtro da consulta.
 	 */
-	public void adicionarPaginacao(final Criteria criteria, final FiltroLazy filtro) {
+	public void adicionarPaginacao(final Criteria criteria, final FiltroLazy<E> filtro) {
 
 		if (filtro.isAscendente() && filtro.getPropriedadeOrdenacao() != null) {
 

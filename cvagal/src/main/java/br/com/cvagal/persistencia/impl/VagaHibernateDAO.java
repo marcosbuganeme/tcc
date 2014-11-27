@@ -7,7 +7,6 @@ import javax.persistence.EntityManager;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
-import org.hibernate.Session;
 import org.hibernate.criterion.Disjunction;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
@@ -39,27 +38,14 @@ public class VagaHibernateDAO extends HibernateDAO<Vaga> implements VagaDAO {
 	/** Constante serialVersionUID. */
 	private static final long serialVersionUID = 3692860768012738685L;
 
-	/** Atributo manager. */
+	/** Atributo entityManager. */
 	@Inject
-	private EntityManager manager;
-
-	@Override
-	public Vaga obterVagaPorDescricao(final String descricao) {
-
-		final Criteria criteria = this.novoCriteria();
-
-		if (StringUtils.isNotEmpty(descricao)) {
-
-			criteria.add(Restrictions.ilike("descricao", descricao, MatchMode.EXACT));
-		}
-
-		return (Vaga) criteria.uniqueResult();
-	}
+	private EntityManager entityManager;
 
 	@Override
 	public List<Vaga> autoCompleteVaga(final String palavraFiltrada) {
 
-		final Criteria criteria = this.novoCriteria();
+		final Criteria criteria = this.obterCriteria();
 
 		this.adicionarRestricaoAutoComplete(criteria, palavraFiltrada);
 
@@ -83,6 +69,8 @@ public class VagaHibernateDAO extends HibernateDAO<Vaga> implements VagaDAO {
 
 		if (StringUtils.isNotEmpty(palavraFiltrada)) {
 
+			or.add(Restrictions.ilike("sku", palavraFiltrada, MatchMode.START));
+
 			or.add(Restrictions.ilike("descricao", palavraFiltrada, MatchMode.START));
 		}
 
@@ -90,7 +78,7 @@ public class VagaHibernateDAO extends HibernateDAO<Vaga> implements VagaDAO {
 	}
 
 	@Override
-	public void adicionarRestricaoLazy(final Criteria criteria, final FiltroLazy filtro) {
+	public void adicionarRestricaoLazy(final Criteria criteria, final FiltroLazy<Vaga> filtro) {
 
 		final Disjunction or = Restrictions.disjunction();
 
@@ -105,37 +93,14 @@ public class VagaHibernateDAO extends HibernateDAO<Vaga> implements VagaDAO {
 	}
 
 	/**
-	 * Método responsável por obter o criteria da entidade.
-	 *
-	 * @author marcosbuganeme
-	 *
-	 * @return <i>criteria da entidade</i>.
-	 */
-	private Criteria novoCriteria() {
-
-		final Session session = this.getManager().unwrap(Session.class);
-
-		return session.createCriteria(Vaga.class);
-	}
-
-	/**
-	 * Retorna o valor do atributo <code>manager</code>
+	 * Retorna o valor do atributo <code>entityManager</code>
 	 *
 	 * @return <code>EntityManager</code>
 	 */
-	public final EntityManager getManager() {
-
-		return this.manager;
-	}
-
-	/**
-	 * Retorna o valor do atributo <code>manager</code>
-	 *
-	 * @return <code>Session</code>
-	 */
 	@Override
-	public final Session getSession() {
+	public EntityManager getEntityManager() {
 
-		return this.getManager().unwrap(Session.class);
+		return this.entityManager;
 	}
+
 }

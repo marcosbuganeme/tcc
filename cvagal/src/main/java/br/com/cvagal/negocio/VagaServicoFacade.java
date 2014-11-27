@@ -25,18 +25,6 @@ import br.com.cvagal.negocio.ServicoFacade;
 public interface VagaServicoFacade extends ServicoFacade<Vaga> {
 
 	/**
-	 * Método responsável por obter a descricao da vaga.
-	 *
-	 * @author marcosbuganeme
-	 *
-	 * @param descricao
-	 *            - do cargo.
-	 * 
-	 * @return <i>vaga consultada</i>.
-	 */
-	Vaga obterVagaPorDescricao(final String descricao);
-
-	/**
 	 * Método responsável por obter uma lista de vagas através do filtro.
 	 *
 	 * @author marcosbuganeme
