@@ -111,4 +111,9 @@ public abstract class Servico<E extends Entidade> implements ServicoFacade<E> {
 		return this.getDAO().listar(filtro);
 	}
 
+	@Override
+	public int quantidadeRegistros(final FiltroLazy<E> filtro) {
+
+		return this.getDAO().quantidadeRegistros(filtro);
+	}
 }

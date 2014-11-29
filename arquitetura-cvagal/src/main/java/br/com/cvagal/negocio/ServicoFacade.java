@@ -91,4 +91,16 @@ public interface ServicoFacade<E extends Entidade> extends Serializable {
 	 * @return <i>lista de dados da entidade</i>.
 	 */
 	List<E> listar(final FiltroLazy<E> filtro);
+
+	/**
+	 * Método responsável por obter a quantidade de registros na consulta.
+	 *
+	 * @author marcosbuganeme
+	 *
+	 * @param filtro
+	 *            - objeto filtro da consulta.
+	 * 
+	 * @return <i>quantidade de registros</i>.
+	 */
+	int quantidadeRegistros(final FiltroLazy<E> filtro);
 }
