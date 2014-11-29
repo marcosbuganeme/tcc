@@ -10,9 +10,28 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import br.com.cvagal.modelo.enuns.EnumEspecialidadeMercado;
 import br.com.cvagal.modelo.impl.EntidadeAbstrata;
 
+/**
+ * <p>
+ * <b>Título:</b> Empresa.java
+ * </p>
+ *
+ * <p>
+ * <b>Descrição:</b> Classe responsável por representar as empresas que serão parceiras do portal no sistema.
+ * </p>
+ *
+ * Data de criação: 28/11/2014
+ *
+ * @author marcosbuganeme
+ *
+ * @author Leides Rodrigues
+ *
+ * @version 1.0.0
+ */
 @Entity
 @Table(name = "empresa")
 public class Empresa extends EntidadeAbstrata {
@@ -22,8 +41,13 @@ public class Empresa extends EntidadeAbstrata {
 	private static final long serialVersionUID = -2291253854788346372L;
 
 	/** Atributo nome. */
-	@Column(name = "nome", length = 150, updatable = false)
+	@NotEmpty
+	@Column(name = "nome", length = 150, nullable = false)
 	private String nome;
+
+	@NotEmpty
+	@Column(name = "cnpj", length = 18, nullable = false)
+	private String cnpj;
 
 	@Enumerated(EnumType.STRING)
 	@Column(name = "especialidade", length = 40, nullable = false)
@@ -42,11 +66,15 @@ public class Empresa extends EntidadeAbstrata {
 	 * 
 	 * @param nome
 	 * 
+	 * @param cnpj
+	 * 
 	 * @param especialidade
 	 */
-	public Empresa( final String nome, final EnumEspecialidadeMercado especialidade ) {
+	public Empresa( final String nome, final String cnpj, final EnumEspecialidadeMercado especialidade ) {
 
 		this.nome = nome;
+
+		this.cnpj = cnpj;
 
 		this.especialidade = especialidade;
 	}
@@ -109,6 +137,26 @@ public class Empresa extends EntidadeAbstrata {
 	public void setColecaoVagas(final Collection<Vaga> colecaoVagas) {
 
 		this.colecaoVagas = colecaoVagas;
+	}
+
+	/**
+	 * Retorna o valor do atributo <code>cnpj</code>
+	 *
+	 * @return <code>String</code>
+	 */
+	public String getCnpj() {
+
+		return this.cnpj;
+	}
+
+	/**
+	 * Define o valor do atributo <code>cnpj</code>.
+	 *
+	 * @param cnpj
+	 */
+	public void setCnpj(final String cnpj) {
+
+		this.cnpj = cnpj;
 	}
 
 }
