@@ -75,7 +75,7 @@ public class Vaga extends EntidadeAbstrata {
 
 	/** Atributo salario. */
 	@NotNull
-	@Column(name = "salario", nullable = false, precision = 10, scale = 4)
+	@Column(name = "salario", nullable = false, precision = 8, scale = 2)
 	private BigDecimal salario;
 
 	/**

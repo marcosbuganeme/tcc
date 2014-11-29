@@ -1,9 +1,10 @@
 package br.com.cvagal.negocio;
 
+import java.util.Collection;
 import java.util.List;
 
+import br.com.cvagal.modelo.Empresa;
 import br.com.cvagal.modelo.Vaga;
-import br.com.cvagal.negocio.ServicoFacade;
 
 /**
  * <p>
@@ -35,4 +36,13 @@ public interface VagaServicoFacade extends ServicoFacade<Vaga> {
 	 * @return <i>lista de vagas</i>.
 	 */
 	List<Vaga> autoCompleteVaga(final String palavraFiltrada);
+
+	/**
+	 * Método responsável por obter uma coleção de todas as empresas.
+	 *
+	 * @author marcosbuganeme
+	 *
+	 * @return <i>coleção de empresas</i>
+	 */
+	Collection<Empresa> listarTodasEmpresas();
 }

@@ -1,11 +1,14 @@
 package br.com.cvagal.negocio.impl;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
 
+import br.com.cvagal.modelo.Empresa;
 import br.com.cvagal.modelo.Vaga;
 import br.com.cvagal.negocio.VagaServicoFacade;
+import br.com.cvagal.persistencia.EmpresaDAO;
 import br.com.cvagal.persistencia.VagaDAO;
 
 /**
@@ -33,6 +36,16 @@ public class VagaServico extends Servico<Vaga> implements VagaServicoFacade {
 	/** Atributo dao. */
 	@Inject
 	private VagaDAO dao;
+
+	/** Atributo empresaDAO. */
+	@Inject
+	private EmpresaDAO empresaDAO;
+
+	@Override
+	public Collection<Empresa> listarTodasEmpresas() {
+
+		return this.empresaDAO.listar();
+	}
 
 	@Override
 	public List<Vaga> autoCompleteVaga(final String palavraFiltrada) {

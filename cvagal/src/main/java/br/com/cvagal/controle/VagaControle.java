@@ -1,5 +1,7 @@
 package br.com.cvagal.controle;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -14,9 +16,10 @@ import org.primefaces.model.SortOrder;
 
 import br.com.cvagal.controle.formulario.VagaFormulario;
 import br.com.cvagal.filtro.FiltroLazy;
+import br.com.cvagal.modelo.Empresa;
 import br.com.cvagal.modelo.Vaga;
+import br.com.cvagal.modelo.enuns.EnumTipoProfissional;
 import br.com.cvagal.negocio.VagaServicoFacade;
-import br.com.cvagal.persistencia.VagaDAO;
 import br.com.cvagal.visao.ManutencaoController;
 
 /**
@@ -42,10 +45,6 @@ public class VagaControle extends ManutencaoController<Vaga> {
 
 	/** Constante serialVersionUID. */
 	private static final long serialVersionUID = 1779164265112638554L;
-
-	/** Atributo dao. */
-	@Inject
-	private VagaDAO dao;
 
 	/** Atributo servico. */
 	@Inject
@@ -75,8 +74,32 @@ public class VagaControle extends ManutencaoController<Vaga> {
 	public List<Vaga> autoCompleteVaga(final String filtro) {
 
 		this.getFormulario().setPalavraChave(new String(filtro));
-		
+
 		return this.getService().autoCompleteVaga(filtro);
+	}
+
+	/**
+	 * Método responsável por obter uma coleção com todas as empresas.
+	 *
+	 * @author marcosbuganeme
+	 *
+	 * @return <i>coleção de empresas</i>
+	 */
+	public Collection<Empresa> preencherComboBoxEmpresa() {
+
+		return this.getService().listarTodasEmpresas();
+	}
+
+	/**
+	 * Método responsável por obter uma coleção com todos as qualificações profissionais.
+	 *
+	 * @author marcosbuganeme
+	 *
+	 * @return <i>coleção com qualificações profissionais</i>.
+	 */
+	public Collection<EnumTipoProfissional> preencherComboBoxQualificacaoProfissional() {
+
+		return Arrays.asList(EnumTipoProfissional.values());
 	}
 
 	@PostConstruct
@@ -106,7 +129,7 @@ public class VagaControle extends ManutencaoController<Vaga> {
 					VagaControle.this.getFormulario().getFiltro().setPalavraChave(VagaControle.this.getFormulario().getPalavraChave());
 				}
 
-				final int rowcount = VagaControle.this.dao.quantidadeRegistros(VagaControle.this.getFormulario().getFiltro());
+				final int rowcount = VagaControle.this.getService().quantidadeRegistros(VagaControle.this.getFormulario().getFiltro());
 
 				this.setRowCount(rowcount);
 

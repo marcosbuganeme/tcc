@@ -85,8 +85,6 @@ public class VagaHibernateDAO extends HibernateDAO<Vaga> implements VagaDAO {
 		if (StringUtils.isNotEmpty(filtro.getPalavraChave())) {
 
 			or.add(Restrictions.ilike("sku", filtro.getPalavraChave(), MatchMode.ANYWHERE));
-
-			or.add(Restrictions.ilike("descricao", filtro.getPalavraChave(), MatchMode.ANYWHERE));
 		}
 
 		criteria.add(or);
