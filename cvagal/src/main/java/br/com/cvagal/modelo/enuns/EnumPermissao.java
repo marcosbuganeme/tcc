@@ -19,9 +19,9 @@ package br.com.cvagal.modelo.enuns;
  */
 public enum EnumPermissao {
 
-	/** Constante SUPERVISOR. */
-	SUPERVISOR,
-
 	/** Constante AUXILIAR. */
-	AUXILIAR;
+	AUXILIAR,
+
+	/** Constante SUPERVISOR. */
+	SUPERVISOR;
 }

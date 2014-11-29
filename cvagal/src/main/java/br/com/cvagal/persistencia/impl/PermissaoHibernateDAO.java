@@ -61,24 +61,15 @@ public class PermissaoHibernateDAO extends HibernateDAO<Permissao> implements Pe
 
 	}
 
-	/**
-	 * Retorna o valor do atributo <code>manager</code>
-	 *
-	 * @return <code>EntityManager</code>
-	 */
-	public EntityManager getManager() {
+	@Override
+	public EntityManager getEntityManager() {
 
 		return this.manager;
 	}
 
-	/**
-	 * Retorna o valor do atributo <code>session</code>
-	 *
-	 * @return <code>Session</code>
-	 */
 	@Override
 	public Session getSession() {
 
-		return this.getManager().unwrap(Session.class);
+		return this.getEntityManager().unwrap(Session.class);
 	}
 }

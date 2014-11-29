@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 import br.com.cvagal.modelo.enuns.EnumPermissao;
 import br.com.cvagal.modelo.impl.EntidadeAbstrata;
@@ -39,15 +40,20 @@ public class Permissao extends EntidadeAbstrata {
 	private static final long serialVersionUID = 4168822922840779410L;
 
 	/** Atributo permissao. */
+	@NotNull
 	@Enumerated(EnumType.STRING)
 	@Column(name = "permissao", length = 20, nullable = false)
 	private EnumPermissao permissao;
 
 	/** Atributo usuario. */
+	@NotNull
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_usuario", nullable = false, foreignKey = @ForeignKey(name = "FK_USUARIO_PERMISSAO"))
 	private Usuario usuario;
 
+	/**
+	 * Responsável pela criação de novas instâncias desta classe.
+	 */
 	public Permissao() {
 
 	}
