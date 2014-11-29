@@ -132,6 +132,18 @@
 
 		<dependency>
 
+			<groupId>org.omnifaces</groupId>
+
+			<artifactId>omnifaces</artifactId>
+
+			<version>1.8.1</version>
+
+			<scope>compile</scope>
+
+		</dependency>
+
+		<dependency>
+
 			<groupId>org.primefaces</groupId>
 
 			<artifactId>primefaces</artifactId>

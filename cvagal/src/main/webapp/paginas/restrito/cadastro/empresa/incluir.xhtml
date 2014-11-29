@@ -17,7 +17,8 @@
 					</div>
 
 					<div class="col-xs-10">
-						<p:inputText id="txtNome" styleClass="form-control" />
+						<p:inputText id="txtNome" value="#{empresaControle.formulario.entidade.nome}"
+							styleClass="form-control" />
 					</div>
 				</div>
 
@@ -29,7 +30,27 @@
 					</div>
 
 					<div class="col-xs-10">
-						<p:inputMask id="txtCNPJ" mask="99.999.999/9999-99" styleClass="form-control" />
+						<p:inputMask id="txtCNPJ" mask="99.999.999/9999-99" value="#{empresaControle.formulario.entidade.cnpj}"
+							styleClass="form-control" />
+					</div>
+				</div>
+
+				<p:spacer height="5" />
+
+				<div class="row">
+					<div class="col-xs-2">
+						<p:outputLabel value="Especialidade" for="comboBoxEspecialidade" />
+					</div>
+
+					<div class="col-xs-10">
+						<p:selectOneMenu id="comboBoxEspecialidade" value="#{empresaControle.formulario.entidade.especialidade}"
+							converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="startsWith"
+							style="width: 100% !important;">
+
+							<f:selectItem itemLabel="#{msgs['combobox.selecionaritens']}" noSelectionOption="true" />
+							<f:selectItems value="#{empresaControle.preencherComboBoxEspecialidade()}" var="e" 
+								itemLabel="#{e}" itemValue="#{e}" />
+						</p:selectOneMenu>
 					</div>
 				</div>
 
@@ -37,7 +58,8 @@
 
 				<div class="row">
 					<div class="col-xs-3">
-						<h:commandButton value="#{msg['botao.salvar']}" styleClass="btn btn-success" />
+						<h:commandButton value="#{msg['botao.salvar']}" action="#{empresaControle.salvar()}"
+							styleClass="btn btn-success" />
 					</div>
 
 					<div class="col-xs-3">

@@ -18,7 +18,26 @@
 					</div>
 
 					<div class="col-xs-10">
-						<p:inputText id="txtSKU" styleClass="form-control" />
+						<p:inputText id="txtSKU" value="#{vagaControle.formulario.entidade.sku}"
+							styleClass="form-control" />
+					</div>
+				</div>
+
+				<p:spacer height="5" />
+
+				<div class="row">
+					<div class="col-xs-2">
+						<p:outputLabel value="Qualificação" for="comboBoxQualificacao" />
+					</div>
+
+					<div class="col-xs-10">
+						<p:selectOneMenu id="comboBoxQualificacao" value="#{vagaControle.formulario.entidade.tipoProfissional}"
+							converter="omnifaces.SelectItemsConverter" effect="fade" filter="true"
+							filterMatchMode="startsWith" style="width: 100% !important;">
+							<f:selectItem itemLabel="Selecione uma opção" noSelectionOption="true" />
+							<f:selectItems value="#{vagaControle.preencherComboBoxQualificacaoProfissional()}" var="q"
+								itemLabel="#{q}" itemValue="#{q}" />
+						</p:selectOneMenu>
 					</div>
 				</div>
 
@@ -30,7 +49,8 @@
 					</div>
 
 					<div class="col-xs-10">
-						<p:inputText id="txtDescricao" styleClass="form-control" />
+						<p:inputText id="txtDescricao" value="#{vagaControle.formulario.entidade.descricao}"
+							styleClass="form-control" />
 					</div>
 				</div>
 
@@ -42,7 +62,11 @@
 					</div>
 
 					<div class="col-xs-10">
-						<p:inputText id="txtSalário" styleClass="form-control moeda" />
+						<p:inputText id="txtSalário" value="#{vagaControle.formulario.entidade.salario}"
+							styleClass="form-control moeda">
+							
+							<f:convertNumber locale="pt_BR" currencySymbol="R$" maxFractionDigits="2" />
+						</p:inputText>
 					</div>
 				</div>
 
@@ -50,13 +74,15 @@
 
 				<div class="row">
 					<div class="col-xs-2">
-						<p:outputLabel value="Empresa" for="comboEmpresa" />
+						<p:outputLabel value="Empresa" for="comboBoxEmpresa" />
 					</div>
 
 					<div class="col-xs-10">
-						<p:selectOneMenu id="comboEmpresa"
+						<p:selectOneMenu id="comboBoxEmpresa" value="#{vagaControle.formulario.entidade.empresa}"
 							effect="fade" filter="true" filterMatchMode="startsWith">
 							<f:selectItem itemLabel="Selecione uma opção" noSelectionOption="true" />
+							<f:selectItems value="#{vagaControle.preencherComboBoxEmpresa()}" var="e"
+								itemLabel="#{e.nome}" itemValue="#{e}" />
 						</p:selectOneMenu>
 					</div>
 				</div>
@@ -65,7 +91,8 @@
 
 				<div class="row">
 					<div class="col-xs-3">
-						<h:commandButton value="#{msg['botao.salvar']}" styleClass="btn btn-success" />
+						<h:commandButton value="#{msg['botao.salvar']}" action="#{vagaControle.salvar()}"
+							styleClass="btn btn-success" />
 					</div>
 
 					<div class="col-xs-3">
