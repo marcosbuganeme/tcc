@@ -11,7 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.cvagal.utilitarios.jsf.UtilitarioJSF;
+import br.com.cvagal.utilitarios.UtilitarioJSF;
 
 /**
  * <p>
@@ -153,7 +153,7 @@ public class LoginControle implements Serializable {
 	 */
 	public String getEmail() {
 
-		return email;
+		return this.email;
 	}
 
 	/**
@@ -161,7 +161,7 @@ public class LoginControle implements Serializable {
 	 *
 	 * @param email
 	 */
-	public void setEmail(String email) {
+	public void setEmail(final String email) {
 
 		this.email = email;
 	}

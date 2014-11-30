@@ -13,6 +13,7 @@ import org.hibernate.criterion.Restrictions;
 
 import br.com.cvagal.filtro.FiltroLazy;
 import br.com.cvagal.modelo.Vaga;
+import br.com.cvagal.modelo.enums.EnumStatus;
 import br.com.cvagal.persistencia.VagaDAO;
 
 /**
@@ -67,11 +68,13 @@ public class VagaHibernateDAO extends HibernateDAO<Vaga> implements VagaDAO {
 
 		final Disjunction or = Restrictions.disjunction();
 
+		criteria.add(Restrictions.eq("status", EnumStatus.ATIVO));
+
 		if (StringUtils.isNotEmpty(palavraFiltrada)) {
 
-			or.add(Restrictions.ilike("sku", palavraFiltrada, MatchMode.START));
-
 			or.add(Restrictions.ilike("descricao", palavraFiltrada, MatchMode.START));
+
+			or.add(Restrictions.ilike("sku", palavraFiltrada, MatchMode.START));
 		}
 
 		criteria.add(or);
@@ -81,6 +84,8 @@ public class VagaHibernateDAO extends HibernateDAO<Vaga> implements VagaDAO {
 	public void adicionarRestricaoLazy(final Criteria criteria, final FiltroLazy<Vaga> filtro) {
 
 		final Disjunction or = Restrictions.disjunction();
+
+		criteria.add(Restrictions.eq("status", EnumStatus.ATIVO));
 
 		if (StringUtils.isNotEmpty(filtro.getPalavraChave())) {
 

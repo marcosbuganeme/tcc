@@ -38,17 +38,20 @@
 			</f:facet>
 		</p:ajaxStatus>
 
-		<p:growl autoUpdate="true" showSummary="true" life="5000" />
-
 		<div class="container">
+
 			<div class="page-header">
 				<div class="jumbotron">
 					<ui:insert name="login" />
 				</div>
 			</div>
-		
+
 			<div class="container-fluid">
-				<ui:insert name="corpo" />
+				<div class="row">
+					<div class="col-xs-12">
+						<ui:insert name="corpo" />
+					</div>
+				</div>
 			</div>
 
 			<p:spacer height="50" />

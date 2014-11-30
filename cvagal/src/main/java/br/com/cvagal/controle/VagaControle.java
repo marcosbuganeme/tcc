@@ -11,6 +11,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.apache.commons.lang3.StringUtils;
+import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
@@ -20,6 +22,7 @@ import br.com.cvagal.modelo.Empresa;
 import br.com.cvagal.modelo.Vaga;
 import br.com.cvagal.modelo.enuns.EnumTipoProfissional;
 import br.com.cvagal.negocio.VagaServicoFacade;
+import br.com.cvagal.utilitarios.UtilitarioJSF;
 import br.com.cvagal.visao.ManutencaoController;
 
 /**
@@ -59,6 +62,16 @@ public class VagaControle extends ManutencaoController<Vaga> {
 	 */
 	public VagaControle() {
 
+	}
+
+	public void onRowSelect(SelectEvent event) {
+
+		UtilitarioJSF.addMensagemInfo("Vaga com o identificador: " + ( (Vaga) event.getObject() ).getIdentificador() + " selecionado!!");
+	}
+
+	public void onRowUnselect(UnselectEvent event) {
+
+		UtilitarioJSF.addMensagemInfo("Vaga com o identificador: " + ( (Vaga) event.getObject() ).getIdentificador() + " selecionado!!");
 	}
 
 	/**

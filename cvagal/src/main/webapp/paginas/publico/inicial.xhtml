@@ -16,6 +16,9 @@
     		</f:metadata>
 
 			<h:form prependId="false">
+
+				<p:growl id="msg_growl" showSummary="true" life="3000" />
+
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="col-xs-4">
@@ -73,7 +76,10 @@
 		</ui:define>
 
 		<ui:define name="corpo">
-			<h:form>
+			<h:form id="frm">
+			
+				<p:growl id="msg_growl" showSummary="true" life="3000" />
+			
 				<div class="row">
 					<div class="col-xs-12">
 						<div class="col-xs-8">
@@ -86,55 +92,84 @@
 
 						<div class="col-xs-2 text-center">
 							<p:commandButton id="btnPesquisar" value="#{msg['botao.pesquisar']}" update="dtVaga"
-								process="@this" styleClass="btn btn-lg">
+								process="@this" styleClass="btn">
 								<p:resetInput target="atCompletePesquisa" />
 							</p:commandButton>
 						</div>
 
 						<div class="col-xs-2 text-center">
 							<p:commandButton value="#{msg['botao.limpar']}" actionListener="#{vagaControle.resetarDados()}"
-								update="@form" process="@this" styleClass="btn btn-lg" />
+								update="@form" process="@this" styleClass="btn" />
 						</div>									
 					</div><!-- div_xs_12 -->
 				</div><!-- div_row -->
 
 				<p:spacer height="5%" />
 
-				<div class="row">
-					<div class="col-xs-12">
-						<div class="table-responsive">
-							<p:dataTable id="dtVaga" value="#{vagaControle.formulario.modelo}" var="v" lazy="true"
-								paginator="true" paginatorPosition="bottom" rows="5" paginatorAlwaysVisible="false"
-								rowsPerPageLabel="#{msg['dt.numeroregistros']}" rowsPerPageTemplate="5, 10, 15, 30, 50"
-								emptyMessage="#{msg['dt.emptyMessage']}" styleClass="table table-hover">
+				<div class="table-responsive">
+					<p:dataTable id="dtVaga" value="#{vagaControle.formulario.modelo}" var="v" lazy="true"
+						selectionMode="single" selection="#{vagaControle.formulario.entidade}" rowKey="#{v.identificador}"
+						paginator="true" paginatorPosition="bottom" rows="5" paginatorAlwaysVisible="false"
+						rowsPerPageLabel="#{msg['dt.numeroregistros']}" rowsPerPageTemplate="5, 10, 15, 30, 50"
+						emptyMessage="#{msg['dt.emptyMessage']}" styleClass="table table-hover">
 
-								<p:column headerText="data de criação" sortBy="#{v.dataCriacao}" width="10%">
-									<h:outputText value="#{v.dataCriacao}" />
-								</p:column>
+						<p:ajax event="rowSelect" listener="#{vagaControle.onRowSelect}" update=":frm:msg_growl" />
+						<p:ajax event="rowUnselect" listener="#{vagaControle.onRowUnselect}" update=":frm:msg_growl" />
 
-								<p:column headerText="#{msg['label.sku']}" sortBy="#{v.sku}" width="10%">
-									<h:outputText value="#{v.sku}" />
-								</p:column>
+						<p:column headerText="data de criação" sortBy="#{v.dataCriacao}" width="10%">
+							<h:outputText value="#{v.dataCriacao}" />
+						</p:column>
 
-								<p:column headerText="Perfil profissional" sortBy="#{v.tipoProfissional}" width="25%">
-									<h:outputText value="#{v.tipoProfissional}" />
-								</p:column>
+						<p:column headerText="#{msg['label.sku']}" sortBy="#{v.sku}" width="10%">
+							<h:outputText value="#{v.sku}" />
+						</p:column>
 
-								<p:column headerText="#{msg['label.descricao']}" sortBy="#{v.descricao}" width="40%">
-									<h:outputText value="#{v.descricao}" />
-								</p:column>
+						<p:column headerText="Perfil profissional" sortBy="#{v.tipoProfissional}" width="25%">
+							<h:outputText value="#{v.tipoProfissional}" />
+						</p:column>
 
-								<p:column headerText="Empresa" sortBy="#{v.empresa.nome}" width="10%">
-									<h:outputText value="#{v.empresa.nome}" />
-								</p:column>
+						<p:column headerText="#{msg['label.descricao']}" sortBy="#{v.descricao}" width="40%">
+							<h:outputText value="#{v.descricao}" />
+						</p:column>
 
-								<p:column headerText="candidatar" width="5%">
-									icone
-								</p:column>
-							</p:dataTable>
-						</div><!-- div_table_responsive -->
-					</div><!-- div_xs_12 -->
-				</div><!-- div_row -->
+						<p:column headerText="Empresa" sortBy="#{v.empresa}" width="10%">
+							<h:outputText value="#{v.empresa.nome}" />
+						</p:column>
+
+						<p:column width="5%">
+							<p:commandLink id="btnAbrirDialogVaga" onclick="PF('dlg').show();">
+								<h:graphicImage library="img" name="candidatar_vaga2.png" />
+							</p:commandLink>
+						</p:column>
+					</p:dataTable>
+				</div><!-- div_table_responsive -->
+
+				<p:dialog id="dialogVaga" widgetVar="dlg" modal="true"
+					header="Detalhamento de vaga" draggable="false" resizable="false"
+					closable="false" showEffect="fade" hideEffect="fade"
+					width="350px" height="120px">
+						
+						<div class="row">
+							<div class="col-xs-12">
+								<h:outputText value="Empresa tal tal tal tal tal tal tal tal tal tal tal" /> <br />
+								<h:outputText value="Salário R$ 1500,00" />
+								
+							</div>
+						</div>
+
+						<p:spacer height="5px" />
+
+						<div class="row">
+							<div class="col-xs-12">
+								<div>
+									<h:commandLink>
+										<h:graphicImage library="img" name="candidatar_vaga.png" />
+									</h:commandLink>
+								</div>
+							</div>
+						</div>
+				</p:dialog>
+
 			</h:form>
 		</ui:define>
 	</ui:composition>

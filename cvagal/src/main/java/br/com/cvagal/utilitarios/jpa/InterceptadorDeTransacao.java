@@ -39,12 +39,12 @@ public class InterceptadorDeTransacao implements Serializable {
 
 	/** Atributo manager. */
 	@Inject
-	private EntityManager manager;
+	private EntityManager entityManager;
 
 	@AroundInvoke
 	public Object invoke(final InvocationContext context) throws Exception {
 
-		final EntityTransaction entidadeTransacional = this.manager.getTransaction();
+		final EntityTransaction entidadeTransacional = this.entityManager.getTransaction();
 
 		boolean criador = false;
 
