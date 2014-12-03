@@ -43,9 +43,6 @@ public class LoginControle implements Serializable {
 	/** Constante ABRE_LOGIN. */
 	private static final String ABRE_LOGIN = "login.abrir";
 
-	/** Constante ABRE_LOGIN. */
-	private static final String FECHA_LOGIN = "login.fechar";
-
 	/** Atributo isLoginAtivado. */
 	private boolean isLoginAtivado;
 
@@ -99,8 +96,6 @@ public class LoginControle implements Serializable {
 			this.isLoginAtivado = true;
 
 		} else {
-
-			UtilitarioJSF.addMensagemInfo(LoginControle.FECHA_LOGIN);
 
 			this.isLoginAtivado = false;
 		}

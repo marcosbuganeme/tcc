@@ -26,6 +26,18 @@ import br.com.cvagal.modelo.Vaga;
 public interface VagaServicoFacade extends ServicoFacade<Vaga> {
 
 	/**
+	 * Método responsável por obter uma vaga pelo seu SKU.
+	 *
+	 * @author marcosbuganeme
+	 *
+	 * @param sku
+	 *            - filtro da consulta
+	 * 
+	 * @return <i>vaga consultada</i>.
+	 */
+	Vaga obterVagaPorSKU(final String sku);
+
+	/**
 	 * Método responsável por obter uma lista de vagas através do filtro.
 	 *
 	 * @author marcosbuganeme

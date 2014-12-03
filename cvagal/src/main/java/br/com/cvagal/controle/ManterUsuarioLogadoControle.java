@@ -5,6 +5,7 @@ import java.io.Serializable;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.persistence.Transient;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
@@ -18,7 +19,7 @@ import br.com.cvagal.seguranca.UsuarioSistema;
  * </p>
  *
  * <p>
- * <b>Descrição:</b>
+ * <b>Descrição:</b> Classe responsável por controlar as requisições da tela de <code>Usuario</code> <code>Permissao</code>.
  * </p>
  *
  * Data de criação: 18/11/2014
@@ -34,6 +35,7 @@ import br.com.cvagal.seguranca.UsuarioSistema;
 public class ManterUsuarioLogadoControle implements Serializable {
 
 	/** Constante serialVersionUID. */
+	@Transient
 	private static final long serialVersionUID = 6695817819537779743L;
 
 	/**

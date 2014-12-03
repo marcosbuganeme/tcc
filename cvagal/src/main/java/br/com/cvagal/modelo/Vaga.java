@@ -53,8 +53,8 @@ public class Vaga extends EntidadeAbstrata {
 	private Empresa empresa;
 
 	/** Atributo colecaoCandidatos. */
-	@ManyToMany(targetEntity = Candidato.class)
-	@JoinTable(name = "inscricao_vaga", joinColumns = @JoinColumn(name = "id_vaga"), inverseJoinColumns = @JoinColumn(name = "id_candidato"))
+	@ManyToMany
+	@JoinTable(name = "inscricao", joinColumns = @JoinColumn(name = "id_vaga"), inverseJoinColumns = @JoinColumn(name = "id_candidato"))
 	private Collection<Candidato> colecaoCandidatos;
 
 	/** Atributo sku. */

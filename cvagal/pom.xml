@@ -25,7 +25,7 @@
 
 			<name>Releases</name>
 
-			<url>http://192.168.1.6:8888/nexus-2.8.1-01/content/repositories/central/</url>
+			<url>http://192.168.1.9:8888/nexus-2.8.1-01/content/repositories/central/</url>
 
 		</repository>
 
@@ -35,7 +35,7 @@
 
 			<name>snapshots</name>
 
-			<url>http://192.168.1.6:8888/nexus-2.8.1-01/content/repositories/snapshots</url>
+			<url>http://192.168.1.9:8888/nexus-2.8.1-01/content/repositories/snapshots</url>
 
 		</snapshotRepository>
 

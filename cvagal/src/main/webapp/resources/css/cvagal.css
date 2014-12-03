@@ -16,10 +16,6 @@ input {
 	height: 2% !important;
 }
 
-.label {
-	color: black !important;
-}
-
 .ajax-status-template-inicial {
 	width: 35px;
 	height: 35px;
@@ -38,4 +34,17 @@ input {
 
 .fontePreta {
 	color: black !important;	
+}
+
+.fonteCorVerde {
+	color: #5cb85c !important;
+}
+
+.fonteCorLaranja {
+	margin-top: 35px;
+	color: #f0ad4e;
+}
+
+.jumbotron h2 {
+	font-size: 50px;
 }

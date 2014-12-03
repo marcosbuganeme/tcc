@@ -9,10 +9,10 @@ import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.Transient;
 
 import org.apache.commons.lang3.StringUtils;
 import org.primefaces.event.SelectEvent;
-import org.primefaces.event.UnselectEvent;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
 
@@ -47,6 +47,7 @@ import br.com.cvagal.visao.ManutencaoController;
 public class VagaControle extends ManutencaoController<Vaga> {
 
 	/** Constante serialVersionUID. */
+	@Transient
 	private static final long serialVersionUID = 1779164265112638554L;
 
 	/** Atributo servico. */
@@ -64,14 +65,17 @@ public class VagaControle extends ManutencaoController<Vaga> {
 
 	}
 
-	public void onRowSelect(SelectEvent event) {
+	/**
+	 * Método responsável por renderizar uma mensagem em um pop-up de exibição quando o botão de swith for ativado.
+	 *
+	 * @author marcosbuganeme
+	 *
+	 * @param event
+	 *            - evento de seleção.
+	 */
+	public void selecionarColunaDataTable(final SelectEvent event) {
 
-		UtilitarioJSF.addMensagemInfo("Vaga com o identificador: " + ( (Vaga) event.getObject() ).getIdentificador() + " selecionado!!");
-	}
-
-	public void onRowUnselect(UnselectEvent event) {
-
-		UtilitarioJSF.addMensagemInfo("Vaga com o identificador: " + ( (Vaga) event.getObject() ).getIdentificador() + " selecionado!!");
+		UtilitarioJSF.addMensagemInfo("Vaga de SKU " + ( (Vaga) event.getObject() ).getSku() + " selecionada!!");
 	}
 
 	/**
@@ -110,7 +114,7 @@ public class VagaControle extends ManutencaoController<Vaga> {
 	 *
 	 * @return <i>coleção com qualificações profissionais</i>.
 	 */
-	public Collection<EnumTipoProfissional> preencherComboBoxQualificacaoProfissional() {
+	public List<EnumTipoProfissional> preencherComboBoxQualificacaoProfissional() {
 
 		return Arrays.asList(EnumTipoProfissional.values());
 	}
@@ -142,6 +146,11 @@ public class VagaControle extends ManutencaoController<Vaga> {
 					VagaControle.this.getFormulario().getFiltro().setPalavraChave(VagaControle.this.getFormulario().getPalavraChave());
 				}
 
+				if (VagaControle.this.getFormulario().getTipoProfissional() != null) {
+
+					VagaControle.this.getFormulario().getFiltro().setEnumerator(VagaControle.this.getFormulario().getTipoProfissional());
+				}
+
 				final int rowcount = VagaControle.this.getService().quantidadeRegistros(VagaControle.this.getFormulario().getFiltro());
 
 				this.setRowCount(rowcount);
@@ -157,6 +166,10 @@ public class VagaControle extends ManutencaoController<Vaga> {
 		this.getFormulario().setPalavraChave(new String());
 
 		this.getFormulario().getFiltro().setPalavraChave(new String());
+
+		this.getFormulario().getFiltro().setEnumerator(null);
+
+		this.getFormulario().setTipoProfissional(null);
 	}
 
 	@Override

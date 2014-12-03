@@ -42,6 +42,12 @@ public class VagaServico extends Servico<Vaga> implements VagaServicoFacade {
 	private EmpresaDAO empresaDAO;
 
 	@Override
+	public Vaga obterVagaPorSKU(final String sku) {
+
+		return this.getDAO().obterVagaPorSKU(sku);
+	}
+
+	@Override
 	public Collection<Empresa> listarTodasEmpresas() {
 
 		return this.empresaDAO.listar();

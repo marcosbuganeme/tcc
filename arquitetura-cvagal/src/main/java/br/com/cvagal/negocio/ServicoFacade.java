@@ -87,7 +87,7 @@ public interface ServicoFacade<E extends Entidade> extends Serializable {
 	 *
 	 * @param filtro
 	 *            - objeto que irá filtrar os dados.
-	 * 
+	 *
 	 * @return <i>lista de dados da entidade</i>.
 	 */
 	List<E> listar(final FiltroLazy<E> filtro);

@@ -5,14 +5,16 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-
-import org.hibernate.validator.constraints.NotEmpty;
-import org.hibernate.validator.constraints.br.CPF;
+import javax.xml.bind.annotation.XmlRootElement;
 
 import br.com.cvagal.modelo.impl.EntidadeAbstrata;
 
@@ -35,6 +37,7 @@ import br.com.cvagal.modelo.impl.EntidadeAbstrata;
  */
 @Entity
 @Table(name = "candidato")
+@XmlRootElement(name = "candidato")
 public class Candidato extends EntidadeAbstrata {
 
 	/** Constante serialVersionUID. */
@@ -42,11 +45,18 @@ public class Candidato extends EntidadeAbstrata {
 	private static final long serialVersionUID = 807427412200657431L;
 
 	/** Atributo vaga. */
-	@ManyToMany(mappedBy = "colecaoCandidatos")
+	@ManyToMany(mappedBy = "colecaoVagas")
 	private Collection<Vaga> colecaoVagas;
 
+	/** Atributo endereco. */
+	@OneToOne(mappedBy = "candidato")
+	private Endereco endereco;
+
+	/** Atributo colecaoTelefones. */
+	@OneToMany(mappedBy = "candidato")
+	private Collection<Telefone> colecaoTelefones;
+
 	/** Atributo nome. */
-	@NotEmpty
 	@Column(name = "nome")
 	private String nome;
 
@@ -56,8 +66,6 @@ public class Candidato extends EntidadeAbstrata {
 	private Date dataNascimento;
 
 	/** Atributo cpf. */
-	@NotEmpty
-	@CPF
 	@Column(name = "cpf", length = 14, nullable = false)
 	private String cpf;
 
@@ -71,19 +79,83 @@ public class Candidato extends EntidadeAbstrata {
 	/**
 	 * Responsável pela criação de novas instâncias desta classe.
 	 * 
+	 * @param endereco
+	 * 
 	 * @param nome
 	 * 
 	 * @param dataNascimento
 	 * 
 	 * @param cpf
 	 */
-	public Candidato( final String nome, final Date dataNascimento, final String cpf ) {
+	public Candidato( final Endereco endereco, final String nome, final Date dataNascimento, final String cpf ) {
+
+		this.endereco = endereco;
 
 		this.nome = nome;
 
 		this.dataNascimento = dataNascimento;
 
 		this.cpf = cpf;
+	}
+
+	/**
+	 * Retorna o valor do atributo <code>colecaoVagas</code>
+	 *
+	 * @return <code>Collection<Vaga></code>
+	 */
+	public Collection<Vaga> getColecaoVagas() {
+
+		return this.colecaoVagas;
+	}
+
+	/**
+	 * Define o valor do atributo <code>colecaoVagas</code>.
+	 *
+	 * @param colecaoVagas
+	 */
+	public void setColecaoVagas(final Collection<Vaga> colecaoVagas) {
+
+		this.colecaoVagas = colecaoVagas;
+	}
+
+	/**
+	 * Retorna o valor do atributo <code>endereco</code>
+	 *
+	 * @return <code>Endereco</code>
+	 */
+	public Endereco getEndereco() {
+
+		return this.endereco;
+	}
+
+	/**
+	 * Define o valor do atributo <code>endereco</code>.
+	 *
+	 * @param endereco
+	 */
+	public void setEndereco(final Endereco endereco) {
+
+		this.endereco = endereco;
+	}
+
+	/**
+	 * Retorna o valor do atributo <code>colecaoTelefones</code>
+	 *
+	 * @return <code>Collection<Telefone></code>
+	 */
+	public Collection<Telefone> getColecaoTelefones() {
+
+		return this.colecaoTelefones;
+	}
+
+	/**
+	 * Define o valor do atributo <code>colecaoTelefones</code>.
+	 *
+	 * @param colecaoTelefones
+	 */
+	public void setColecaoTelefones(final Collection<Telefone> colecaoTelefones) {
+
+		this.colecaoTelefones = colecaoTelefones;
 	}
 
 	/**
@@ -144,26 +216,6 @@ public class Candidato extends EntidadeAbstrata {
 	public void setCpf(final String cpf) {
 
 		this.cpf = cpf;
-	}
-
-	/**
-	 * Retorna o valor do atributo <code>colecaoVagas</code>
-	 *
-	 * @return <code>Collection<Vaga></code>
-	 */
-	public Collection<Vaga> getColecaoVagas() {
-
-		return this.colecaoVagas;
-	}
-
-	/**
-	 * Define o valor do atributo <code>colecaoVagas</code>.
-	 *
-	 * @param colecaoVagas
-	 */
-	public void setColecaoVagas(final Collection<Vaga> colecaoVagas) {
-
-		this.colecaoVagas = colecaoVagas;
 	}
 
 }

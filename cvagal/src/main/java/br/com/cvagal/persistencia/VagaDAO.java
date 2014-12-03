@@ -34,4 +34,16 @@ public interface VagaDAO extends DAO<Vaga> {
 	 * @return <i>lista de vagas</i>.
 	 */
 	List<Vaga> autoCompleteVaga(final String palavraFiltrada);
+
+	/**
+	 * Método responsável por obter uma vaga pelo seu SKU.
+	 *
+	 * @author marcosbuganeme
+	 *
+	 * @param sku
+	 *            - filtro da consulta
+	 * 
+	 * @return <i>vaga consultada</i>.
+	 */
+	Vaga obterVagaPorSKU(final String sku);
 }

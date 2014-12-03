@@ -1,6 +1,7 @@
 package br.com.cvagal.controle.formulario;
 
 import br.com.cvagal.modelo.Vaga;
+import br.com.cvagal.modelo.enuns.EnumTipoProfissional;
 import br.com.cvagal.visao.formulario.Formulario;
 
 /**
@@ -28,11 +29,15 @@ public class VagaFormulario extends Formulario<Vaga> {
 	/** Atributo palavraChave. */
 	private String palavraChave;
 
+	/** Atributo tipoProfissional. */
+	private EnumTipoProfissional tipoProfissional;
+
 	/**
 	 * Retorna o valor do atributo <code>palavraChave</code>
 	 *
 	 * @return <code>String</code>
 	 */
+	@Override
 	public String getPalavraChave() {
 
 		return this.palavraChave;
@@ -43,9 +48,30 @@ public class VagaFormulario extends Formulario<Vaga> {
 	 *
 	 * @param palavraChave
 	 */
+	@Override
 	public void setPalavraChave(final String palavraChave) {
 
 		this.palavraChave = palavraChave;
+	}
+
+	/**
+	 * Retorna o valor do atributo <code>tipoProfissional</code>
+	 *
+	 * @return <code>EnumTipoProfissional</code>
+	 */
+	public EnumTipoProfissional getTipoProfissional() {
+
+		return this.tipoProfissional;
+	}
+
+	/**
+	 * Define o valor do atributo <code>tipoProfissional</code>.
+	 *
+	 * @param tipoProfissional
+	 */
+	public void setTipoProfissional(final EnumTipoProfissional tipoProfissional) {
+
+		this.tipoProfissional = tipoProfissional;
 	}
 
 }

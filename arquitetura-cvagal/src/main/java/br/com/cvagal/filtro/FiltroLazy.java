@@ -29,8 +29,8 @@ public class FiltroLazy<E extends Entidade> implements Serializable {
 	/** Atributo palavraChave. */
 	private String palavraChave;
 
-	/** Atributo objetoFiltro. */
-	private E objetoFiltro;
+	/** Atributo enumerator. */
+	private Enum enumerator;
 
 	/** Atributo primeiroRegistro. */
 	private int primeiroRegistro;
@@ -145,23 +145,23 @@ public class FiltroLazy<E extends Entidade> implements Serializable {
 	}
 
 	/**
-	 * Retorna o valor do atributo <code>objetoFiltro</code>
+	 * Retorna o valor do atributo <code>enumerator</code>
 	 *
-	 * @return <code>E</code>
+	 * @return <code>Enum</code>
 	 */
-	public E getObjetoFiltro() {
+	public Enum getEnumerator() {
 
-		return this.objetoFiltro;
+		return this.enumerator;
 	}
 
 	/**
-	 * Define o valor do atributo <code>objetoFiltro</code>.
+	 * Define o valor do atributo <code>enumerator</code>.
 	 *
-	 * @param objetoFiltro
+	 * @param enumerator
 	 */
-	public void setObjetoFiltro(final E objetoFiltro) {
+	public void setEnumerator(final Enum enumerator) {
 
-		this.objetoFiltro = objetoFiltro;
+		this.enumerator = enumerator;
 	}
 
 }

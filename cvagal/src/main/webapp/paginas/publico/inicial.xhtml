@@ -5,6 +5,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:o="http://omnifaces.org/ui"
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:composition template="/WEB-INF/template/template_inicial.xhtml">
@@ -17,25 +18,25 @@
 
 			<h:form prependId="false">
 
-				<p:growl id="msg_growl" showSummary="true" life="3000" />
+				<p:growl autoUpdate="true" showSummary="true" life="3000" />
+
+				<div class="row">
+					<div class="col-xs-3">
+						<h1 class="fonteCorVerde">CVagal!</h1>
+					</div>
+
+					<div class="col-xs-9">
+						<h2 class="fonteCorLaranja">Cadastro de Vaga Legal !!</h2>
+					</div>
+				</div>
 
 				<div class="row">
 					<div class="col-xs-12">
-						<div class="col-xs-4">
-							<span class="label">
-								<h4>Clique para autenticar</h4>
-							</span>
+						<div style="margin-top: 25px;">
+							<p:inputSwitch value="#{loginControle.loginAtivado}">
+								<p:ajax listener="#{loginControle.abreLogin()}" process="@this" update="@form" />
+							</p:inputSwitch>
 						</div>
-
-						<div class="col-xs-4">
-							<div style="margin-top: 25px;">
-								<p:inputSwitch value="#{loginControle.loginAtivado}">
-									<p:ajax listener="#{loginControle.abreLogin()}" process="@this" update="@form" />
-								</p:inputSwitch>
-							</div>
-						</div>
-
-						<div class="col-xs-4" />
 					</div>
 				</div>
 
@@ -67,8 +68,8 @@
 
 					<div class="row">
 						<div class="col-xs-12">
-							<h:commandButton value="#{msg['botao.autenticar']}"
-								action="#{loginControle.autenticar()}" styleClass="btn btn-lg btn-primary btn-block" />
+							<h:commandButton value="#{msg['botao.autenticar']}" action="#{loginControle.autenticar()}"
+								styleClass="btn btn-lg btn-success btn-block" />
 						</div>
 					</div>
 				</div>
@@ -82,93 +83,53 @@
 			
 				<div class="row">
 					<div class="col-xs-12">
-						<div class="col-xs-8">
-							<p:autoComplete id="atCompletePesquisa" value="#{vagaControle.formulario.filtro.objetoFiltro}"
+						<div class="col-xs-4">
+							<p:autoComplete id="atCompletePesquisa" value="#{vagaControle.formulario.filtro.palavraChave}"
 								completeMethod="#{vagaControle.autoCompleteVaga}" forceSelection="true"
 								var="v" itemLabel="#{v.sku}" itemValue="#{v}"
 								placeholder="#{msg['placeholder.input.pesquisa.lazy']}"
 								converter="br.com.cvgal.conversor.conversorVaga" />
 						</div>
+						
+						<div class="col-xs-4">
+							<p:selectOneMenu id="comboBoxPerfilProfissional" value="#{vagaControle.formulario.tipoProfissional}"
+								converter="omnifaces.SelectItemsConverter" effect="fade" filter="true" filterMatchMode="startsWith">
 
-						<div class="col-xs-2 text-center">
-							<p:commandButton id="btnPesquisar" value="#{msg['botao.pesquisar']}" update="dtVaga"
-								process="@this" styleClass="btn">
-								<p:resetInput target="atCompletePesquisa" />
-							</p:commandButton>
+								<f:selectItem itemLabel="#{msg['combobox.selecionaritens']}" itemValue="" noSelectionOption="true" />
+
+								<f:selectItems value="#{vagaControle.preencherComboBoxQualificacaoProfissional()}"
+									var="tipoProfissional" itemLabel="#{tipoProfissional}" itemValue="#{tipoProfissional}" />
+
+							</p:selectOneMenu>
 						</div>
 
 						<div class="col-xs-2 text-center">
-							<p:commandButton value="#{msg['botao.limpar']}" actionListener="#{vagaControle.resetarDados()}"
-								update="@form" process="@this" styleClass="btn" />
+							<h:commandButton id="btnPesquisar" value="#{msg['botao.pesquisar']}"
+								styleClass="btn btn-success">
+
+								<p:resetInput target="atCompletePesquisa" />
+
+								<p:ajax update="dtVaga" process="@all" />
+
+							</h:commandButton>
+						</div>
+
+						<div class="col-xs-2 text-center">
+							<h:commandButton value="#{msg['botao.limpar']}" actionListener="#{vagaControle.resetarDados()}"
+								styleClass="btn btn-warning">
+
+								<p:resetInput target="atCompletePesquisa" />
+
+								<p:ajax update="dtVaga" process="@this"/>
+
+							</h:commandButton>
 						</div>									
 					</div><!-- div_xs_12 -->
 				</div><!-- div_row -->
 
 				<p:spacer height="5%" />
 
-				<div class="table-responsive">
-					<p:dataTable id="dtVaga" value="#{vagaControle.formulario.modelo}" var="v" lazy="true"
-						selectionMode="single" selection="#{vagaControle.formulario.entidade}" rowKey="#{v.identificador}"
-						paginator="true" paginatorPosition="bottom" rows="5" paginatorAlwaysVisible="false"
-						rowsPerPageLabel="#{msg['dt.numeroregistros']}" rowsPerPageTemplate="5, 10, 15, 30, 50"
-						emptyMessage="#{msg['dt.emptyMessage']}" styleClass="table table-hover">
-
-						<p:ajax event="rowSelect" listener="#{vagaControle.onRowSelect}" update=":frm:msg_growl" />
-						<p:ajax event="rowUnselect" listener="#{vagaControle.onRowUnselect}" update=":frm:msg_growl" />
-
-						<p:column headerText="data de criação" sortBy="#{v.dataCriacao}" width="10%">
-							<h:outputText value="#{v.dataCriacao}" />
-						</p:column>
-
-						<p:column headerText="#{msg['label.sku']}" sortBy="#{v.sku}" width="10%">
-							<h:outputText value="#{v.sku}" />
-						</p:column>
-
-						<p:column headerText="Perfil profissional" sortBy="#{v.tipoProfissional}" width="25%">
-							<h:outputText value="#{v.tipoProfissional}" />
-						</p:column>
-
-						<p:column headerText="#{msg['label.descricao']}" sortBy="#{v.descricao}" width="40%">
-							<h:outputText value="#{v.descricao}" />
-						</p:column>
-
-						<p:column headerText="Empresa" sortBy="#{v.empresa}" width="10%">
-							<h:outputText value="#{v.empresa.nome}" />
-						</p:column>
-
-						<p:column width="5%">
-							<p:commandLink id="btnAbrirDialogVaga" onclick="PF('dlg').show();">
-								<h:graphicImage library="img" name="candidatar_vaga2.png" />
-							</p:commandLink>
-						</p:column>
-					</p:dataTable>
-				</div><!-- div_table_responsive -->
-
-				<p:dialog id="dialogVaga" widgetVar="dlg" modal="true"
-					header="Detalhamento de vaga" draggable="false" resizable="false"
-					closable="false" showEffect="fade" hideEffect="fade"
-					width="350px" height="120px">
-						
-						<div class="row">
-							<div class="col-xs-12">
-								<h:outputText value="Empresa tal tal tal tal tal tal tal tal tal tal tal" /> <br />
-								<h:outputText value="Salário R$ 1500,00" />
-								
-							</div>
-						</div>
-
-						<p:spacer height="5px" />
-
-						<div class="row">
-							<div class="col-xs-12">
-								<div>
-									<h:commandLink>
-										<h:graphicImage library="img" name="candidatar_vaga.png" />
-									</h:commandLink>
-								</div>
-							</div>
-						</div>
-				</p:dialog>
+				<ui:include src="/paginas/publico/datatable_lazy_vaga.xhtml" />
 
 			</h:form>
 		</ui:define>

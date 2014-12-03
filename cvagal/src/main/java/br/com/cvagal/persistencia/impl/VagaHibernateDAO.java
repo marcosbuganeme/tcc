@@ -53,6 +53,41 @@ public class VagaHibernateDAO extends HibernateDAO<Vaga> implements VagaDAO {
 		return criteria.list();
 	}
 
+	@Override
+	public Vaga obterVagaPorSKU(final String sku) {
+
+		final Criteria criteria = this.obterCriteria();
+
+		criteria.add(Restrictions.eq("status", EnumStatus.ATIVO));
+
+		if (StringUtils.isNotEmpty(sku)) {
+
+			criteria.add(Restrictions.eq("sku", sku));
+		}
+
+		return (Vaga) criteria.uniqueResult();
+	}
+
+	@Override
+	public void adicionarRestricaoLazy(final Criteria criteria, final FiltroLazy<Vaga> filtro) {
+
+		final Disjunction or = Restrictions.disjunction();
+		
+		criteria.add(Restrictions.eq("status", EnumStatus.ATIVO));
+
+		if (StringUtils.isNotEmpty(filtro.getPalavraChave())) {
+
+			or.add(Restrictions.ilike("sku", filtro.getPalavraChave(), MatchMode.ANYWHERE));
+		}
+
+		if (filtro.getEnumerator() != null) {
+
+			or.add(Restrictions.eq("tipoProfissional", filtro.getEnumerator()));
+		}
+		
+		criteria.add(or);
+	}
+
 	/**
 	 * Método responsável por adicionar restrição para o componente autocomplete do primefaces.
 	 *
@@ -66,33 +101,12 @@ public class VagaHibernateDAO extends HibernateDAO<Vaga> implements VagaDAO {
 	 */
 	private void adicionarRestricaoAutoComplete(final Criteria criteria, final String palavraFiltrada) {
 
-		final Disjunction or = Restrictions.disjunction();
-
 		criteria.add(Restrictions.eq("status", EnumStatus.ATIVO));
 
 		if (StringUtils.isNotEmpty(palavraFiltrada)) {
 
-			or.add(Restrictions.ilike("descricao", palavraFiltrada, MatchMode.START));
-
-			or.add(Restrictions.ilike("sku", palavraFiltrada, MatchMode.START));
+			criteria.add(Restrictions.ilike("sku", palavraFiltrada, MatchMode.START));
 		}
-
-		criteria.add(or);
-	}
-
-	@Override
-	public void adicionarRestricaoLazy(final Criteria criteria, final FiltroLazy<Vaga> filtro) {
-
-		final Disjunction or = Restrictions.disjunction();
-
-		criteria.add(Restrictions.eq("status", EnumStatus.ATIVO));
-
-		if (StringUtils.isNotEmpty(filtro.getPalavraChave())) {
-
-			or.add(Restrictions.ilike("sku", filtro.getPalavraChave(), MatchMode.ANYWHERE));
-		}
-
-		criteria.add(or);
 	}
 
 	/**
