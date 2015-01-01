@@ -15,7 +15,7 @@
 			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
 			emptyMessage="#{msg['dt.emptyMessage']}" styleClass="table table-hover">
 
-			<p:ajax event="rowSelect" listener="#{vagaControle.onRow}" update=":frm:msg_growl" />
+			<p:ajax event="rowSelect" listener="#{vagaControle.onRow}" />
 
 			<div class="text-center">
 				<p:column headerText="#{msg['col.criacao']}" width="10%" styleClass="text-center">

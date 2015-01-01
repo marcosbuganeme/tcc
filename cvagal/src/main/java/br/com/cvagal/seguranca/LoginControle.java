@@ -6,6 +6,7 @@ import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.persistence.Transient;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -38,13 +39,8 @@ public class LoginControle implements Serializable {
 	private static final long serialVersionUID = -8104167516722439878L;
 
 	/** Constante FALHA_VALIDACAO_CREDENCIAIS. */
+	@Transient
 	private static final String FALHA_VALIDACAO_CREDENCIAIS = "credencial.invalida";
-
-	/** Constante ABRE_LOGIN. */
-	private static final String ABRE_LOGIN = "login.abrir";
-
-	/** Atributo isLoginAtivado. */
-	private boolean isLoginAtivado;
 
 	/** Atributo email. */
 	private String email;
@@ -82,26 +78,6 @@ public class LoginControle implements Serializable {
 	}
 
 	/**
-	 * Método responsável por apresentar uma mensagem na tela quando o botão de login for acionado.
-	 *
-	 * @author marcosbuganeme
-	 * 
-	 */
-	public void abreLogin() {
-
-		if (this.isLoginAtivado) {
-
-			UtilitarioJSF.addMensagemInfo(LoginControle.ABRE_LOGIN);
-
-			this.isLoginAtivado = true;
-
-		} else {
-
-			this.isLoginAtivado = false;
-		}
-	}
-
-	/**
 	 * Retorna o valor do atributo <code>request</code>
 	 *
 	 * @return <code>HttpServletRequest</code>
@@ -119,26 +95,6 @@ public class LoginControle implements Serializable {
 	private HttpServletResponse getResponse() {
 
 		return (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-	}
-
-	/**
-	 * Retorna o valor do atributo <code>isLoginAtivado</code>
-	 *
-	 * @return <code>boolean</code>
-	 */
-	public boolean isLoginAtivado() {
-
-		return this.isLoginAtivado;
-	}
-
-	/**
-	 * Define o valor do atributo <code>isLoginAtivado</code>.
-	 *
-	 * @param isLoginAtivado
-	 */
-	public void setLoginAtivado(final boolean isLoginAtivado) {
-
-		this.isLoginAtivado = isLoginAtivado;
 	}
 
 	/**

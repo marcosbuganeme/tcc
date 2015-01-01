@@ -45,6 +45,10 @@ input {
 	color: #f0ad4e;
 }
 
+.navBarPadding {
+	padding-top: 0.6% !important;
+}
+
 .jumbotron h2 {
 	font-size: 50px;
 }

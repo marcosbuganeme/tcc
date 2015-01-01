@@ -9,69 +9,6 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	<ui:composition template="/WEB-INF/template/template_inicial.xhtml">
-		<ui:define name="login">
-
-    		<f:metadata>
-    			<f:viewParam name="dummy" />
-    			<f:event listener="#{loginControle.preRender()}" type="preRenderView" />
-    		</f:metadata>
-
-			<h:form prependId="false">
-
-				<p:growl autoUpdate="true" showSummary="true" life="3000" />
-
-				<div class="row">
-					<div class="col-xs-3">
-						<h1 class="fonteCorVerde">CVagal!</h1>
-					</div>
-
-					<div class="col-xs-9">
-						<h2 class="fonteCorLaranja">Cadastro de Vaga Legal !!</h2>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-xs-12">
-						<div style="margin-top: 25px;">
-							<p:inputSwitch value="#{loginControle.loginAtivado}">
-								<p:ajax listener="#{loginControle.abreLogin()}" process="@this" update="@form" />
-							</p:inputSwitch>
-						</div>
-					</div>
-				</div>
-
-				<div jsf:rendered="#{loginControle.loginAtivado}">
-					<div class="row">
-						<div class="col-xs-12">
-							<div class="input-group">
-								<span class="input-group-addon">@</span>
-								<p:inputText id="j_username" value="#{loginControle.email}" placeholder="#{msg['placeholder.usuario']}" styleClass="form-control larguraMaxima" />
-							</div>
-						</div>
-					</div>
-
-					<p:spacer height="1%" />
-
-					<div class="row">
-						<div class="col-xs-12">
-							<div class="input-group">
-								<span class="input-group-addon"> #</span>
-								<p:password id="j_password" placeholder="#{msg['placeholder.senha']}" styleClass="form-control larguraMaxima" />
-							</div>
-						</div>
-					</div>
-
-					<p:spacer height="10" />
-
-					<div class="row">
-						<div class="col-xs-12">
-							<h:commandButton value="#{msg['botao.autenticar']}" action="#{loginControle.autenticar()}"
-								styleClass="btn btn-lg btn-success btn-block" />
-						</div>
-					</div>
-				</div>
-			</h:form>
-		</ui:define>
 		
 		<ui:define name="titulo_corpo">
 			<h1>Vagas atualizadas</h1>
@@ -79,8 +16,6 @@
 
 		<ui:define name="corpo">
 			<h:form id="frm">
-				<p:growl id="msg_growl" autoUpdate="true" showSummary="true" life="3000" />
-
 				<div class="col-xs-4 text-center">
 					<p:selectOneMenu id="comboBoxPerfilProfissional" value="#{vagaControle.formulario.tipoProfissional}"
 						converter="omnifaces.SelectItemsConverter" effect="fade" filter="true" filterMatchMode="startsWith" styleClass="larguraMaxima">
