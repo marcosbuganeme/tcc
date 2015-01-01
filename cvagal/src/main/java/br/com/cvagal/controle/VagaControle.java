@@ -145,7 +145,10 @@ public class VagaControle extends ManutencaoController<Vaga> {
 
 				VagaControle.this.getFormulario().getFiltro().setPropriedadeOrdenacao(sortField);
 
-				VagaControle.this.getFormulario().getFiltro().setEnumerator(VagaControle.this.getFormulario().getTipoProfissional());
+				if (VagaControle.this.getFormulario().getTipoProfissional() != null) {
+
+					VagaControle.this.getFormulario().getFiltro().setEnumerator(VagaControle.this.getFormulario().getTipoProfissional());
+				}
 
 				final int rowcount = VagaControle.this.getService().quantidadeRegistros(VagaControle.this.getFormulario().getFiltro());
 
@@ -160,6 +163,8 @@ public class VagaControle extends ManutencaoController<Vaga> {
 	public void resetarDados() {
 
 		this.getFormulario().getFiltro().setEnumerator(null);
+
+		this.getFormulario().setTipoProfissional(null);
 	}
 
 	@Override

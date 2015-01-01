@@ -50,7 +50,7 @@
 						</div>
 					</div>
 
-					<p:spacer height="10" />
+					<p:spacer height="1%" />
 
 					<div class="row">
 						<div class="col-xs-12">
@@ -81,32 +81,27 @@
 			<h:form id="frm">
 				<p:growl id="msg_growl" autoUpdate="true" showSummary="true" life="3000" />
 
-				<div class="row">
-					<div class="col-xs-12">
+				<div class="col-xs-4 text-center">
+					<p:selectOneMenu id="comboBoxPerfilProfissional" value="#{vagaControle.formulario.tipoProfissional}"
+						converter="omnifaces.SelectItemsConverter" effect="fade" filter="true" filterMatchMode="startsWith" styleClass="larguraMaxima">
+						<f:selectItem itemLabel="#{msg['combobox.selecionaritens']}" itemValue="" noSelectionOption="true" />
 
-						<div class="col-xs-4">
-							<p:selectOneMenu id="comboBoxPerfilProfissional" value="#{vagaControle.formulario.tipoProfissional}"
-								converter="omnifaces.SelectItemsConverter" effect="fade" filter="true" filterMatchMode="startsWith">
-								<f:selectItem itemLabel="#{msg['combobox.selecionaritens']}" itemValue="" noSelectionOption="true" />
+						<f:selectItems value="#{vagaControle.preencherComboBoxQualificacaoProfissional()}"
+							var="tipoProfissional" itemLabel="#{tipoProfissional}" itemValue="#{tipoProfissional}" />
+					</p:selectOneMenu>
+				</div>
 
-								<f:selectItems value="#{vagaControle.preencherComboBoxQualificacaoProfissional()}"
-									var="tipoProfissional" itemLabel="#{tipoProfissional}" itemValue="#{tipoProfissional}" />
-							</p:selectOneMenu>
-						</div>
+				<div class="col-xs-4 text-center">
+					<h:commandButton id="btnPesquisar" value="#{msg['botao.pesquisar']}" styleClass="btn btn-success">
+						<p:ajax update="dtVaga" process="@all" />
+					</h:commandButton>
+				</div>
 
-						<div class="col-xs-2 text-center">
-							<h:commandButton id="btnPesquisar" value="#{msg['botao.pesquisar']}" styleClass="btn btn-success">
-								<p:ajax update="dtVaga" process="@all" />
-							</h:commandButton>
-						</div>
-
-						<div class="col-xs-2 text-center">
-							<h:commandButton value="#{msg['botao.limpar']}" styleClass="btn btn-warning">
-								<p:ajax update="dtVaga" process="@all" oncomplete="#{vagaControle.resetarDados()}" />
-							</h:commandButton>
-						</div>									
-					</div><!-- div_xs_12 -->
-				</div><!-- div_row -->
+				<div class="col-xs-4 text-center">
+					<h:commandButton value="#{msg['botao.limpar']}" styleClass="btn btn-warning">
+						<p:ajax update="dtVaga" process="@this" listener="#{vagaControle.resetarDados()}" />
+					</h:commandButton>
+				</div>
 
 				<p:spacer height="5%" />
 
