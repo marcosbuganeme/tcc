@@ -12,35 +12,52 @@
 			selectionMode="single" selection="#{vagaControle.formulario.entidade}" rowKey="#{v.identificador}"
 			paginator="true" paginatorPosition="bottom" rows="5" paginatorAlwaysVisible="false"
 			rowsPerPageLabel="#{msg['dt.numeroregistros']}" rowsPerPageTemplate="5, 10, 15, 30, 50"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
 			emptyMessage="#{msg['dt.emptyMessage']}" styleClass="table table-hover">
 
-			<p:ajax event="rowSelect" listener="#{vagaControle.selecionarColunaDataTable}" update=":frm:msg_growl" />
+			<p:ajax event="rowSelect" listener="#{vagaControle.onRow}" update=":frm:msg_growl" />
 
-			<p:column headerText="data de criação" sortBy="#{v.dataCriacao}" width="10%">
-				<h:outputText value="#{v.dataCriacao}" />
-			</p:column>
+			<div class="text-center">
+				<p:column headerText="#{msg['col.criacao']}" width="10%" styleClass="text-center">
+					<h:outputText value="#{v.dataCriacao}">
+						<f:convertDateTime pattern="dd/MM/yyyy"/>
+					</h:outputText>
+				</p:column>
 
-			<p:column headerText="#{msg['label.sku']}" sortBy="#{v.sku}" width="10%">
-				<h:outputText value="#{v.sku}" />
-			</p:column>
+				<p:column headerText="Profissional" width="35%" styleClass="text-center">
+					<h:outputText value="#{v.tipoProfissional}" />
+				</p:column>
 
-			<p:column headerText="Perfil profissional" sortBy="#{v.tipoProfissional}" width="25%">
-				<h:outputText value="#{v.tipoProfissional}" />
-			</p:column>
+				<p:column headerText="Empresa" width="35%" styleClass="text-center">
+					<h:outputText value="#{v.empresa.nome}" />
+				</p:column>
 
-			<p:column headerText="#{msg['label.descricao']}" sortBy="#{v.descricao}" width="40%">
-				<h:outputText value="#{v.descricao}" />
-			</p:column>
+				<p:column width="15%" exportable="false" styleClass="text-center">
+					<h:commandLink id="btnExportarPDF" title="#{msg['dt.exportarpdf']}">
+						<h:graphicImage library="img" name="pdf-32x32.png" />
+						<p:dataExporter target="dtVaga" type="pdf" fileName="vagas" />
+					</h:commandLink>
+					<p:tooltip id="tooltipPDF" for="btnExportarPDF" />
 
-			<p:column headerText="Empresa" sortBy="#{v.empresa}" width="10%">
-				<h:outputText value="#{v.empresa.nome}" />
-			</p:column>
+					<h:commandLink id="btnExportarXLS" title="#{msg['dt.exportarxls']}">
+						<h:graphicImage library="img" name="excel-32x32.png" />
+						<p:dataExporter target="dtVaga" type="xls" fileName="vagas" />
+					</h:commandLink>
+					<p:tooltip id="tooltipXLS" for="btnExportarXLS" />
 
-			<p:column width="5%">
-				<p:commandLink id="btnAbrirDialogVaga" onclick="PF('dlgVaga').show();" update="@this">
-					<h:graphicImage library="img" name="adicionar_datatatable.png" />
-				</p:commandLink>
-			</p:column>
+					<h:commandLink id="btnExportarXML" title="#{msg['dt.exportarxml']}">
+						<h:graphicImage library="img" name="xml-32x32.png" />
+						<p:dataExporter target="dtVaga" type="xml" fileName="vagas" />
+					</h:commandLink>
+					<p:tooltip id="tooltipXML" for="btnExportarXML" />
+
+					<h:commandLink id="btnExportarCSV" title="#{msg['dt.exportarcsv']}">
+						<h:graphicImage library="img" name="csv-32x32.png" />
+						<p:dataExporter target="dtVaga" type="csv" fileName="vagas" />
+					</h:commandLink>
+					<p:tooltip id="tooltipCSV" for="btnExportarCSV" />
+				</p:column>
+			</div>
 		</p:dataTable>
 	</div><!-- div_table_responsive -->
 </html>

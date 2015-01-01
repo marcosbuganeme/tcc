@@ -1,14 +1,10 @@
 package br.com.cvagal.persistencia.impl;
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.Criteria;
-import org.hibernate.criterion.Disjunction;
-import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 
 import br.com.cvagal.filtro.FiltroLazy;
@@ -33,7 +29,6 @@ import br.com.cvagal.persistencia.VagaDAO;
  *
  * @version 1.0.0
  */
-@SuppressWarnings("unchecked")
 public class VagaHibernateDAO extends HibernateDAO<Vaga> implements VagaDAO {
 
 	/** Constante serialVersionUID. */
@@ -42,16 +37,6 @@ public class VagaHibernateDAO extends HibernateDAO<Vaga> implements VagaDAO {
 	/** Atributo entityManager. */
 	@Inject
 	private EntityManager entityManager;
-
-	@Override
-	public List<Vaga> autoCompleteVaga(final String palavraFiltrada) {
-
-		final Criteria criteria = this.obterCriteria();
-
-		this.adicionarRestricaoAutoComplete(criteria, palavraFiltrada);
-
-		return criteria.list();
-	}
 
 	@Override
 	public Vaga obterVagaPorSKU(final String sku) {
@@ -71,41 +56,11 @@ public class VagaHibernateDAO extends HibernateDAO<Vaga> implements VagaDAO {
 	@Override
 	public void adicionarRestricaoLazy(final Criteria criteria, final FiltroLazy<Vaga> filtro) {
 
-		final Disjunction or = Restrictions.disjunction();
-		
 		criteria.add(Restrictions.eq("status", EnumStatus.ATIVO));
-
-		if (StringUtils.isNotEmpty(filtro.getPalavraChave())) {
-
-			or.add(Restrictions.ilike("sku", filtro.getPalavraChave(), MatchMode.ANYWHERE));
-		}
 
 		if (filtro.getEnumerator() != null) {
 
-			or.add(Restrictions.eq("tipoProfissional", filtro.getEnumerator()));
-		}
-		
-		criteria.add(or);
-	}
-
-	/**
-	 * Método responsável por adicionar restrição para o componente autocomplete do primefaces.
-	 *
-	 * @author marcosbuganeme
-	 *
-	 * @param criteria
-	 *            - objeto criteria para restrição da consulta
-	 * 
-	 * @param palavraFiltrada
-	 *            - filtro da consulta.
-	 */
-	private void adicionarRestricaoAutoComplete(final Criteria criteria, final String palavraFiltrada) {
-
-		criteria.add(Restrictions.eq("status", EnumStatus.ATIVO));
-
-		if (StringUtils.isNotEmpty(palavraFiltrada)) {
-
-			criteria.add(Restrictions.ilike("sku", palavraFiltrada, MatchMode.START));
+			criteria.add(Restrictions.eq("tipoProfissional", filtro.getEnumerator()));
 		}
 	}
 

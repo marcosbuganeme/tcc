@@ -5,8 +5,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -45,7 +43,7 @@ public class Candidato extends EntidadeAbstrata {
 	private static final long serialVersionUID = 807427412200657431L;
 
 	/** Atributo vaga. */
-	@ManyToMany(mappedBy = "colecaoVagas")
+	@ManyToMany(mappedBy = "colecaoCandidatos")
 	private Collection<Vaga> colecaoVagas;
 
 	/** Atributo endereco. */

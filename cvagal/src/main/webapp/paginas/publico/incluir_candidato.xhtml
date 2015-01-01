@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:p="http://primefaces.org/ui">
+
+	<h:form>
+		<f:metadata>
+			<o:viewParam name="vaga" value="#{vagaControle.formulario.entidade}" />
+		</f:metadata>
+
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="form-group">
+					<p:outputLabel value="Nome" for="txtNome" />
+					<span style="color: red;">*</span>
+				</div>
+				<p:inputText id="txtNome" value="#{vagaControle.formulario.candidato.nome}" />
+			</div>
+		</div>
+
+		<p:spacer height="5px" />
+
+		<div class="row">
+			<div class="col-xs-6">
+				<div class="form-group">
+					<p:outputLabel value="Data de nascimento: " for="dtDataNascimento" />
+					<span style="color: red;">*</span>
+				</div>
+				<p:calendar id="dtDataNascimento" value="#{vagaControle.formulario.candidato.dataNascimento}"
+					locale="pt" navigator="true" pattern="dd-MM-yyyy"  />
+			</div>
+	
+			<div class="col-xs-6">
+				<div class="form-group">
+					<p:outputLabel value="CPF: " for="txtCPF" />
+					<span style="color: red;">*</span>
+				</div>
+				<p:inputMask id="txtCPF" mask="999.999.999-99" value="#{vagaControle.formulario.candidato.cpf}" />
+			</div>
+		</div>
+
+		<p:spacer height="5px" />
+
+		<div class="row">
+			<div class="col-xs-2">
+				<div class="form-group">
+					<p:outputLabel value="DDD: " for="txtDDD" />
+					<span style="color: red;">*</span>
+				</div>
+				<p:inputMask id="txtDDD" mask="(099)" maxlength="2" value="#{vagaControle.formulario.telefone.ddd}" />
+			</div>
+
+			<div class="col-xs-3">
+				<div class="form-group">
+					<p:outputLabel value="Número: " for="txtNumero" />
+					<span style="color: red;">*</span>
+				</div>
+				<p:inputText id="txtNumero" maxlength="9" value="#{vagaControle.formulario.telefone.numero}" />
+			</div>
+
+			<div class="col-xs-6">
+				<div class="form-group">
+					<p:outputLabel value="Tipo de telefone: " for="comboBoxTipoTelefone" />
+					<span style="color: red;">*</span>
+				</div>
+				<p:selectOneMenu id="comboBoxTipoTelefone" value="#{vagaControle.formulario.tipoTelefone}"
+					converter="omnifaces.SelectItemsConverter" ffect="fade" filter="true" filterMatchMode="startsWith"
+					style="width: 100% !important">
+
+					<f:selectItem itemLabel="#{msg['combobox.selecionaritens']}" noSelectionOption="true" />
+
+					<f:selectItems value="#{vagaControle.preencherComboBoxTipoTelefone()}"
+						var="t" itemLabel="#{t}" itemValue="#{t}" />
+				</p:selectOneMenu>
+			</div>
+
+			<div class="col-xs-1">
+				<p:commandLink action="#{vagaControle.adicionarTelefone()}" update=":frm:dtTelefone" process="@this">
+					<h:graphicImage library="img" name="adicionar.png" style="margin-top: 38px !important;" />
+				</p:commandLink>
+			</div>
+		</div>
+
+		<p:spacer height="5px" />
+
+		<p:dataTable id="dtTelefone" value="#{vagaControle.formulario.colecaoTelefones}" var="t" emptyMessage="#{msg['dt.emptyMessage']}">
+			<p:column headerText="ddd" sortBy="#{t.ddd}">
+				<h:outputText value="#{t.ddd}" />		
+			</p:column>
+
+			<p:column headerText="numero">
+				<h:outputText value="#{t.numero}" />
+			</p:column>
+
+			<p:column headerText="tipo do telefone" sortBy="#{t.tipoTelefone}">
+				<h:outputText value="#{t.tipoTelefone}" />
+			</p:column>
+
+			<p:column>
+				<h:commandLink id="btnLinkEditar">
+					<h:graphicImage library="img" name="editar_datatable.png" />
+				</h:commandLink>
+
+				<p:spacer width="5px" />
+
+				<h:commandLink id="btnLinkRemover">
+					<h:graphicImage library="img" name="remover_datatable.png" />
+				</h:commandLink>			
+			</p:column>
+		</p:dataTable>
+
+		<p:spacer height="5px" />
+
+		<div class="row">
+			<div class="col-xs-6">
+				<h:commandButton value="Salvar" styleClass="btn btn-success" />
+			</div>
+	
+			<div class="col-xs-6">
+				<h:commandButton value="Cancelar" styleClass="btn btn-danger" />
+			</div>
+		</div>
+	</h:form>
+</html>

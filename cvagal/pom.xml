@@ -25,7 +25,7 @@
 
 			<name>Releases</name>
 
-			<url>http://192.168.1.9:8888/nexus-2.8.1-01/content/repositories/central/</url>
+			<url>http://192.168.1.7:8888/nexus-2.8.1-01/content/repositories/central/</url>
 
 		</repository>
 
@@ -35,7 +35,7 @@
 
 			<name>snapshots</name>
 
-			<url>http://192.168.1.9:8888/nexus-2.8.1-01/content/repositories/snapshots</url>
+			<url>http://192.168.1.7:8888/nexus-2.8.1-01/content/repositories/snapshots</url>
 
 		</snapshotRepository>
 
@@ -283,6 +283,29 @@
 			<version>1.1.3</version>
 
 			<scope>compile</scope>
+
+		</dependency>
+
+		<dependency>
+
+			<groupId>com.lowagie</groupId>
+
+			<artifactId>itext</artifactId>
+
+			<version>4.2.1</version>
+
+			<scope>compile</scope>
+
+		</dependency>
+
+
+		<dependency>
+
+			<groupId>org.apache.poi</groupId>
+
+			<artifactId>poi</artifactId>
+
+			<version>3.10.1</version>
 
 		</dependency>
 

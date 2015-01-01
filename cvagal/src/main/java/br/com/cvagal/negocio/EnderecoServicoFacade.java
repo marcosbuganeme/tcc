@@ -21,4 +21,15 @@ import br.com.cvagal.modelo.Endereco;
  */
 public interface EnderecoServicoFacade extends ServicoFacade<Endereco> {
 
+	/**
+	 * Método responsável por obter um endereço através do cep.
+	 *
+	 * @author marcosbuganeme
+	 *
+	 * @param cep
+	 *            - filtro da pesquisa.
+	 * 
+	 * @return <i>endereço completo</i>.
+	 */
+	Endereco obterEnderecoPorCEP(final String cep);
 }

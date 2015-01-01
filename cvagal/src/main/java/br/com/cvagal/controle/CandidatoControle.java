@@ -1,7 +1,6 @@
 package br.com.cvagal.controle;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 
 import javax.faces.view.ViewScoped;
@@ -15,7 +14,6 @@ import br.com.cvagal.modelo.Coordenada;
 import br.com.cvagal.modelo.Endereco;
 import br.com.cvagal.modelo.Telefone;
 import br.com.cvagal.modelo.Vaga;
-import br.com.cvagal.modelo.enuns.EnumTipoTelefone;
 import br.com.cvagal.negocio.CandidatoServicoFacade;
 import br.com.cvagal.utilitarios.UtilitarioJSF;
 import br.com.cvagal.visao.ManutencaoController;
@@ -109,18 +107,6 @@ public class CandidatoControle extends ManutencaoController<Candidato> {
 
 			this.getFormulario().getColecaoTelefones().remove(this.getFormulario().getTelefone());
 		}
-	}
-
-	/**
-	 * Método responsável por preencher o componente comboBox com os tipos de telefone.
-	 *
-	 * @author marcosbuganeme
-	 *
-	 * @return <i>coleção de tipos de telefone</i>.
-	 */
-	public Collection<EnumTipoTelefone> preencherComboBoxTipoTelefone() {
-
-		return Arrays.asList(EnumTipoTelefone.values());
 	}
 
 	/**

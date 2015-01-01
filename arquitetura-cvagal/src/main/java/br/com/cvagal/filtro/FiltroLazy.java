@@ -21,6 +21,7 @@ import br.com.cvagal.modelo.Entidade;
  *
  * @version 1.0.0
  */
+@SuppressWarnings("rawtypes")
 public class FiltroLazy<E extends Entidade> implements Serializable {
 
 	/** Constante serialVersionUID. */
@@ -163,5 +164,4 @@ public class FiltroLazy<E extends Entidade> implements Serializable {
 
 		this.enumerator = enumerator;
 	}
-
 }

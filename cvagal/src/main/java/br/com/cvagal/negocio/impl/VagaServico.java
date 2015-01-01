@@ -1,7 +1,6 @@
 package br.com.cvagal.negocio.impl;
 
 import java.util.Collection;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -51,12 +50,6 @@ public class VagaServico extends Servico<Vaga> implements VagaServicoFacade {
 	public Collection<Empresa> listarTodasEmpresas() {
 
 		return this.empresaDAO.listar();
-	}
-
-	@Override
-	public List<Vaga> autoCompleteVaga(final String palavraFiltrada) {
-
-		return this.getDAO().autoCompleteVaga(palavraFiltrada);
 	}
 
 	@Override

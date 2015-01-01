@@ -26,33 +26,8 @@ public class VagaFormulario extends Formulario<Vaga> {
 	/** Constante serialVersionUID. */
 	private static final long serialVersionUID = 2755902946593533095L;
 
-	/** Atributo palavraChave. */
-	private String palavraChave;
-
 	/** Atributo tipoProfissional. */
 	private EnumTipoProfissional tipoProfissional;
-
-	/**
-	 * Retorna o valor do atributo <code>palavraChave</code>
-	 *
-	 * @return <code>String</code>
-	 */
-	@Override
-	public String getPalavraChave() {
-
-		return this.palavraChave;
-	}
-
-	/**
-	 * Define o valor do atributo <code>palavraChave</code>.
-	 *
-	 * @param palavraChave
-	 */
-	@Override
-	public void setPalavraChave(final String palavraChave) {
-
-		this.palavraChave = palavraChave;
-	}
 
 	/**
 	 * Retorna o valor do atributo <code>tipoProfissional</code>
@@ -73,5 +48,4 @@ public class VagaFormulario extends Formulario<Vaga> {
 
 		this.tipoProfissional = tipoProfissional;
 	}
-
 }

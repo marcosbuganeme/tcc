@@ -11,7 +11,7 @@
 		<ui:define name="titulo">Cadastro de Vaga</ui:define>
 
 		<ui:define name="corpo">
-			<h:form>
+			<h:form id="frm">
 				<div class="row">
 					<div class="col-xs-2">
 						<p:outputLabel value="SKU" for="txtSKU" />
@@ -62,9 +62,7 @@
 					</div>
 
 					<div class="col-xs-10">
-						<p:inputText id="txtSalário" value="#{vagaControle.formulario.entidade.salario}"
-							styleClass="form-control moeda">
-							
+						<p:inputText id="txtSalário" value="#{vagaControle.formulario.entidade.salario}" styleClass="form-control moeda">
 							<f:convertNumber locale="pt_BR" currencySymbol="R$" maxFractionDigits="2" />
 						</p:inputText>
 					</div>
@@ -96,13 +94,16 @@
 					</div>
 
 					<div class="col-xs-3">
-						<h:commandButton value="#{msg['botao.limpar']}" styleClass="btn btn-danger" />
+						<h:commandButton value="#{msg['botao.limpar']}" styleClass="btn btn-warning">
+
+							<p:resetInput target="frm" />
+
+							<p:ajax update="@form" process="@this" oncomplete="configurarMoeda();"/>
+
+						</h:commandButton>
 					</div>
 				</div>
 			</h:form>
-
 		</ui:define>
-
 	</ui:composition>
-
 </html>

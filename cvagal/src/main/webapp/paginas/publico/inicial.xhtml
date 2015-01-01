@@ -45,9 +45,7 @@
 						<div class="col-xs-12">
 							<div class="input-group">
 								<span class="input-group-addon">@</span>
-								<p:inputText id="j_username" value="#{loginControle.email}"
-									placeholder="#{msg['placeholder.usuario']}"
-									styleClass="form-control larguraMaxima" />
+								<p:inputText id="j_username" value="#{loginControle.email}" placeholder="#{msg['placeholder.usuario']}" styleClass="form-control larguraMaxima" />
 							</div>
 						</div>
 					</div>
@@ -58,8 +56,7 @@
 						<div class="col-xs-12">
 							<div class="input-group">
 								<span class="input-group-addon"> #</span>
-								<p:password id="j_password" placeholder="#{msg['placeholder.senha']}"
-									styleClass="form-control larguraMaxima" />
+								<p:password id="j_password" placeholder="#{msg['placeholder.senha']}" styleClass="form-control larguraMaxima" />
 							</div>
 						</div>
 					</div>
@@ -75,53 +72,37 @@
 				</div>
 			</h:form>
 		</ui:define>
+		
+		<ui:define name="titulo_corpo">
+			<h1>Vagas atualizadas</h1>
+		</ui:define>
 
 		<ui:define name="corpo">
 			<h:form id="frm">
-			
-				<p:growl id="msg_growl" showSummary="true" life="3000" />
-			
+				<p:growl id="msg_growl" autoUpdate="true" showSummary="true" life="3000" />
+
 				<div class="row">
 					<div class="col-xs-12">
-						<div class="col-xs-4">
-							<p:autoComplete id="atCompletePesquisa" value="#{vagaControle.formulario.filtro.palavraChave}"
-								completeMethod="#{vagaControle.autoCompleteVaga}" forceSelection="true"
-								var="v" itemLabel="#{v.sku}" itemValue="#{v}"
-								placeholder="#{msg['placeholder.input.pesquisa.lazy']}"
-								converter="br.com.cvgal.conversor.conversorVaga" />
-						</div>
-						
+
 						<div class="col-xs-4">
 							<p:selectOneMenu id="comboBoxPerfilProfissional" value="#{vagaControle.formulario.tipoProfissional}"
 								converter="omnifaces.SelectItemsConverter" effect="fade" filter="true" filterMatchMode="startsWith">
-
 								<f:selectItem itemLabel="#{msg['combobox.selecionaritens']}" itemValue="" noSelectionOption="true" />
 
 								<f:selectItems value="#{vagaControle.preencherComboBoxQualificacaoProfissional()}"
 									var="tipoProfissional" itemLabel="#{tipoProfissional}" itemValue="#{tipoProfissional}" />
-
 							</p:selectOneMenu>
 						</div>
 
 						<div class="col-xs-2 text-center">
-							<h:commandButton id="btnPesquisar" value="#{msg['botao.pesquisar']}"
-								styleClass="btn btn-success">
-
-								<p:resetInput target="atCompletePesquisa" />
-
+							<h:commandButton id="btnPesquisar" value="#{msg['botao.pesquisar']}" styleClass="btn btn-success">
 								<p:ajax update="dtVaga" process="@all" />
-
 							</h:commandButton>
 						</div>
 
 						<div class="col-xs-2 text-center">
-							<h:commandButton value="#{msg['botao.limpar']}" actionListener="#{vagaControle.resetarDados()}"
-								styleClass="btn btn-warning">
-
-								<p:resetInput target="atCompletePesquisa" />
-
-								<p:ajax update="dtVaga" process="@this"/>
-
+							<h:commandButton value="#{msg['botao.limpar']}" styleClass="btn btn-warning">
+								<p:ajax update="dtVaga" process="@all" oncomplete="#{vagaControle.resetarDados()}" />
 							</h:commandButton>
 						</div>									
 					</div><!-- div_xs_12 -->
@@ -129,8 +110,11 @@
 
 				<p:spacer height="5%" />
 
-				<ui:include src="/paginas/publico/datatable_lazy_vaga.xhtml" />
-
+				<div class="row">
+					<div class="col-xs-12">
+						<ui:include src="/paginas/publico/datatable_lazy_vaga.xhtml" />
+					</div>
+				</div>
 			</h:form>
 		</ui:define>
 	</ui:composition>

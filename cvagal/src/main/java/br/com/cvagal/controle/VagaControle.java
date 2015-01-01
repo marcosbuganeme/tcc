@@ -1,17 +1,18 @@
 package br.com.cvagal.controle;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.Transient;
 
-import org.apache.commons.lang3.StringUtils;
 import org.primefaces.event.SelectEvent;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
@@ -21,6 +22,7 @@ import br.com.cvagal.filtro.FiltroLazy;
 import br.com.cvagal.modelo.Empresa;
 import br.com.cvagal.modelo.Vaga;
 import br.com.cvagal.modelo.enuns.EnumTipoProfissional;
+import br.com.cvagal.modelo.enuns.EnumTipoTelefone;
 import br.com.cvagal.negocio.VagaServicoFacade;
 import br.com.cvagal.utilitarios.UtilitarioJSF;
 import br.com.cvagal.visao.ManutencaoController;
@@ -78,21 +80,11 @@ public class VagaControle extends ManutencaoController<Vaga> {
 		UtilitarioJSF.addMensagemInfo("Vaga de SKU " + ( (Vaga) event.getObject() ).getSku() + " selecionada!!");
 	}
 
-	/**
-	 * Método responsável por listar as vagas através do componente autocomplete do primefaces.
-	 *
-	 * @author marcosbuganeme
-	 *
-	 * @param filtro
-	 *            - filtro do autocomplete.
-	 * 
-	 * @return <i>lista de vagas</i>.
-	 */
-	public List<Vaga> autoCompleteVaga(final String filtro) {
+	public void onRow(final SelectEvent evento) throws IOException {
 
-		this.getFormulario().setPalavraChave(new String(filtro));
+		FacesContext.getCurrentInstance().getExternalContext().redirect("error.xhtml");
 
-		return this.getService().autoCompleteVaga(filtro);
+		UtilitarioJSF.addMensagemInfo("Vaga de SKU " + ( (Vaga) evento.getObject() ).getSku() + " selecionada!!");
 	}
 
 	/**
@@ -119,6 +111,18 @@ public class VagaControle extends ManutencaoController<Vaga> {
 		return Arrays.asList(EnumTipoProfissional.values());
 	}
 
+	/**
+	 * Método responsável por preencher o componente comboBox com os tipos de telefone.
+	 *
+	 * @author marcosbuganeme
+	 *
+	 * @return <i>coleção de tipos de telefone</i>.
+	 */
+	public List<EnumTipoTelefone> preencherComboBoxTipoTelefone() {
+
+		return Arrays.asList(EnumTipoTelefone.values());
+	}
+
 	@PostConstruct
 	@Override
 	public void iniciarDados() {
@@ -141,15 +145,7 @@ public class VagaControle extends ManutencaoController<Vaga> {
 
 				VagaControle.this.getFormulario().getFiltro().setPropriedadeOrdenacao(sortField);
 
-				if (StringUtils.isNotEmpty(VagaControle.this.getFormulario().getPalavraChave())) {
-
-					VagaControle.this.getFormulario().getFiltro().setPalavraChave(VagaControle.this.getFormulario().getPalavraChave());
-				}
-
-				if (VagaControle.this.getFormulario().getTipoProfissional() != null) {
-
-					VagaControle.this.getFormulario().getFiltro().setEnumerator(VagaControle.this.getFormulario().getTipoProfissional());
-				}
+				VagaControle.this.getFormulario().getFiltro().setEnumerator(VagaControle.this.getFormulario().getTipoProfissional());
 
 				final int rowcount = VagaControle.this.getService().quantidadeRegistros(VagaControle.this.getFormulario().getFiltro());
 
@@ -163,13 +159,7 @@ public class VagaControle extends ManutencaoController<Vaga> {
 	@Override
 	public void resetarDados() {
 
-		this.getFormulario().setPalavraChave(new String());
-
-		this.getFormulario().getFiltro().setPalavraChave(new String());
-
 		this.getFormulario().getFiltro().setEnumerator(null);
-
-		this.getFormulario().setTipoProfissional(null);
 	}
 
 	@Override

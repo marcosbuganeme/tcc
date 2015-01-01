@@ -1,7 +1,6 @@
 package br.com.cvagal.negocio;
 
 import java.util.Collection;
-import java.util.List;
 
 import br.com.cvagal.modelo.Empresa;
 import br.com.cvagal.modelo.Vaga;
@@ -36,18 +35,6 @@ public interface VagaServicoFacade extends ServicoFacade<Vaga> {
 	 * @return <i>vaga consultada</i>.
 	 */
 	Vaga obterVagaPorSKU(final String sku);
-
-	/**
-	 * Método responsável por obter uma lista de vagas através do filtro.
-	 *
-	 * @author marcosbuganeme
-	 *
-	 * @param palavraFiltrada
-	 *            - filtro da consulta.
-	 * 
-	 * @return <i>lista de vagas</i>.
-	 */
-	List<Vaga> autoCompleteVaga(final String palavraFiltrada);
 
 	/**
 	 * Método responsável por obter uma coleção de todas as empresas.

@@ -22,7 +22,7 @@
 		<h:outputStylesheet library="css" name="cvagal.css" />
 
 		<title>
-			<ui:insert name="titulo">Cvagal</ui:insert>
+			<ui:insert name="titulo">SGV - 2015</ui:insert>
 		</title>
 	</h:head>
 
@@ -39,11 +39,8 @@
 		</p:ajaxStatus>
 
 		<div class="container">
-
 			<div class="page-header">
-				<div class="jumbotron">
-					<ui:insert name="login" />
-				</div>
+				<ui:insert name="titulo_corpo" />
 			</div>
 
 			<div class="container-fluid">
@@ -54,10 +51,12 @@
 				</div>
 			</div>
 
-			<p:spacer height="50" />
+			<p:spacer height="5%" />
 
 			<footer>
-				Software desenvolvido para o tcc da pós senac
+				<div class="text-center">
+					<strong>Software desenvolvido para o <em>tcc da pós-graduação Senac</em></strong>
+				</div>
 			</footer>
 		</div>
 
