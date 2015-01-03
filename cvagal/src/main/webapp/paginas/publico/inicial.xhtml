@@ -11,7 +11,7 @@
 	<ui:composition template="/WEB-INF/template/template_inicial.xhtml">
 		
 		<ui:define name="titulo_corpo">
-			<h1>Vagas atualizadas</h1>
+			<h1>#{msg['label.vagaemprego']}</h1>
 		</ui:define>
 
 		<ui:define name="corpo">
@@ -23,6 +23,9 @@
 
 						<f:selectItems value="#{vagaControle.preencherComboBoxQualificacaoProfissional()}"
 							var="tipoProfissional" itemLabel="#{tipoProfissional}" itemValue="#{tipoProfissional}" />
+							
+						<p:ajax update="dtVaga" process="@all" />
+
 					</p:selectOneMenu>
 				</div>
 

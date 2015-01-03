@@ -1,19 +1,19 @@
 package br.com.cvagal.controle;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 
+import javax.annotation.PostConstruct;
+import javax.faces.event.ActionEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.Transient;
+import javax.servlet.http.Part;
 
 import br.com.cvagal.controle.formulario.CandidatoFormulario;
 import br.com.cvagal.modelo.Candidato;
-import br.com.cvagal.modelo.Coordenada;
-import br.com.cvagal.modelo.Endereco;
 import br.com.cvagal.modelo.Telefone;
-import br.com.cvagal.modelo.Vaga;
 import br.com.cvagal.negocio.CandidatoServicoFacade;
 import br.com.cvagal.utilitarios.UtilitarioJSF;
 import br.com.cvagal.visao.ManutencaoController;
@@ -59,24 +59,31 @@ public class CandidatoControle extends ManutencaoController<Candidato> {
 	@Inject
 	private VagaControle vagaControle;
 
-	@Override
-	public void salvar() {
+	/** Atributo curriculo. */
+	private transient Part curriculo;
 
-		final Collection<Vaga> colecaoVagas = new ArrayList<Vaga>(0);
+	public void uploadCurriculo(ActionEvent evento) {
 
-		this.getFormulario().getEntidade().setColecaoTelefones(this.getFormulario().getColecaoTelefones());
+		if (this.curriculo != null) {
 
-		this.getFormulario().getEndereco().setCoordenada(this.getFormulario().getCoordenada());
+			try (InputStream is = this.curriculo.getInputStream(); ByteArrayOutputStream out = new ByteArrayOutputStream()) {
 
-		this.getFormulario().getEntidade().setEndereco(this.getFormulario().getEndereco());
+				int leitura = -1;
 
-		colecaoVagas.add(this.vagaControle.getFormulario().getEntidade());
+				byte[] buffer = new byte[1024];
 
-		this.getFormulario().getEntidade().setColecaoVagas(colecaoVagas);
+				while (( leitura = is.read(buffer) ) != -1) {
 
-		this.getService().salvar(this.getFormulario().getEntidade());
+					out.write(buffer, 0, leitura);
+				}
+				
+				this.getFormulario().getEntidade().setCurriculo(out.toByteArray());
 
-		super.salvar();
+			} catch (final Exception e) {
+
+				throw new RuntimeException("Erro ao fazer o upload do arquivo");
+			}
+		}
 	}
 
 	/**
@@ -128,19 +135,22 @@ public class CandidatoControle extends ManutencaoController<Candidato> {
 	}
 
 	@Override
+	@PostConstruct
 	public void iniciarDados() {
 
-		this.getFormulario().setEntidade(new Candidato());
+		// this.getFormulario().setEntidade(new Candidato());
+		//
+		// this.getFormulario().setTelefone(new Telefone());
+		//
+		// this.getFormulario().setColecaoTelefones(new ArrayList<Telefone>(0));
+		//
+		// this.getFormulario().setEndereco(new Endereco());
+		//
+		// this.getFormulario().getEndereco().setCoordenada(new Coordenada());
+		//
+		// this.getFormulario().setCoordenada(new Coordenada());
 
-		this.getFormulario().setTelefone(new Telefone());
-
-		this.getFormulario().setColecaoTelefones(new ArrayList<Telefone>(0));
-
-		this.getFormulario().setEndereco(new Endereco());
-
-		this.getFormulario().getEndereco().setCoordenada(new Coordenada());
-
-		this.getFormulario().setCoordenada(new Coordenada());
+		this.getFormulario().setVaga(this.vagaControle.getFormulario().getVagaSelecionada());
 	}
 
 	@Override
@@ -160,4 +170,25 @@ public class CandidatoControle extends ManutencaoController<Candidato> {
 
 		return this.servico;
 	}
+
+	/**
+	 * Retorna o valor do atributo <code>curriculo</code>
+	 *
+	 * @return <code>Part</code>
+	 */
+	public Part getCurriculo() {
+
+		return this.curriculo;
+	}
+
+	/**
+	 * Define o valor do atributo <code>curriculo</code>.
+	 *
+	 * @param curriculo
+	 */
+	public void setCurriculo(final Part curriculo) {
+
+		this.curriculo = curriculo;
+	}
+
 }

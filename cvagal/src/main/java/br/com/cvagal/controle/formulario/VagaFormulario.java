@@ -26,6 +26,9 @@ public class VagaFormulario extends Formulario<Vaga> {
 	/** Constante serialVersionUID. */
 	private static final long serialVersionUID = 2755902946593533095L;
 
+	/** Atributo vagaSelecionada. */
+	private Vaga vagaSelecionada;
+
 	/** Atributo tipoProfissional. */
 	private EnumTipoProfissional tipoProfissional;
 
@@ -47,5 +50,25 @@ public class VagaFormulario extends Formulario<Vaga> {
 	public void setTipoProfissional(final EnumTipoProfissional tipoProfissional) {
 
 		this.tipoProfissional = tipoProfissional;
+	}
+
+	/**
+	 * Retorna o valor do atributo <code>vagaSelecionada</code>
+	 *
+	 * @return <code>Vaga</code>
+	 */
+	public Vaga getVagaSelecionada() {
+
+		return this.vagaSelecionada;
+	}
+
+	/**
+	 * Define o valor do atributo <code>vagaSelecionada</code>.
+	 *
+	 * @param vagaSelecionada
+	 */
+	public void setVagaSelecionada(final Vaga vagaSelecionada) {
+
+		this.vagaSelecionada = vagaSelecionada;
 	}
 }

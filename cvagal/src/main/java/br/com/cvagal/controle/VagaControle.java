@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.Transient;
@@ -24,7 +24,6 @@ import br.com.cvagal.modelo.Vaga;
 import br.com.cvagal.modelo.enuns.EnumTipoProfissional;
 import br.com.cvagal.modelo.enuns.EnumTipoTelefone;
 import br.com.cvagal.negocio.VagaServicoFacade;
-import br.com.cvagal.utilitarios.UtilitarioJSF;
 import br.com.cvagal.visao.ManutencaoController;
 
 /**
@@ -45,7 +44,7 @@ import br.com.cvagal.visao.ManutencaoController;
  * @version 1.0.0
  */
 @Named
-@ViewScoped
+@SessionScoped
 public class VagaControle extends ManutencaoController<Vaga> {
 
 	/** Constante serialVersionUID. */
@@ -75,16 +74,14 @@ public class VagaControle extends ManutencaoController<Vaga> {
 	 * @param event
 	 *            - evento de seleção.
 	 */
-	public void selecionarColunaDataTable(final SelectEvent event) {
-
-		UtilitarioJSF.addMensagemInfo("Vaga de SKU " + ( (Vaga) event.getObject() ).getSku() + " selecionada!!");
-	}
-
 	public void onRow(final SelectEvent evento) throws IOException {
 
-		FacesContext.getCurrentInstance().getExternalContext().redirect("error.xhtml");
+		if (evento != null) {
 
-		UtilitarioJSF.addMensagemInfo("Vaga de SKU " + ( (Vaga) evento.getObject() ).getSku() + " selecionada!!");
+			this.getFormulario().setVagaSelecionada((Vaga) evento.getObject());
+		}
+
+		FacesContext.getCurrentInstance().getExternalContext().redirect("incluir_candidato.xhtml");
 	}
 
 	/**
@@ -165,6 +162,8 @@ public class VagaControle extends ManutencaoController<Vaga> {
 		this.getFormulario().getFiltro().setEnumerator(null);
 
 		this.getFormulario().setTipoProfissional(null);
+
+		this.getFormulario().setVagaSelecionada(new Vaga());
 	}
 
 	@Override

@@ -5,6 +5,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -66,6 +67,11 @@ public class Candidato extends EntidadeAbstrata {
 	/** Atributo cpf. */
 	@Column(name = "cpf", length = 14, nullable = false)
 	private String cpf;
+
+	/** Atributo curriculo. */
+	@Lob
+	@Column(name = "curriculo")
+	private byte[] curriculo;
 
 	/**
 	 * Responsável pela criação de novas instâncias desta classe.
@@ -214,6 +220,26 @@ public class Candidato extends EntidadeAbstrata {
 	public void setCpf(final String cpf) {
 
 		this.cpf = cpf;
+	}
+
+	/**
+	 * Retorna o valor do atributo <code>curriculo</code>
+	 *
+	 * @return <code>byte[]</code>
+	 */
+	public byte[] getCurriculo() {
+
+		return this.curriculo;
+	}
+
+	/**
+	 * Define o valor do atributo <code>curriculo</code>.
+	 *
+	 * @param curriculo
+	 */
+	public void setCurriculo(final byte[] curriculo) {
+
+		this.curriculo = curriculo;
 	}
 
 }

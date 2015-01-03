@@ -8,6 +8,7 @@ import br.com.cvagal.modelo.Candidato;
 import br.com.cvagal.modelo.Coordenada;
 import br.com.cvagal.modelo.Endereco;
 import br.com.cvagal.modelo.Telefone;
+import br.com.cvagal.modelo.Vaga;
 import br.com.cvagal.visao.formulario.Formulario;
 
 /**
@@ -32,6 +33,9 @@ public class CandidatoFormulario extends Formulario<Candidato> {
 	/** Constante serialVersionUID. */
 	@Transient
 	private static final long serialVersionUID = 3472546146561514048L;
+
+	/** Atributo vaga. */
+	private Vaga vaga;
 
 	/** Atributo endereco. */
 	private Endereco endereco;
@@ -123,6 +127,26 @@ public class CandidatoFormulario extends Formulario<Candidato> {
 	public void setTelefone(final Telefone telefone) {
 
 		this.telefone = telefone;
+	}
+
+	/**
+	 * Retorna o valor do atributo <code>vaga</code>
+	 *
+	 * @return <code>Vaga</code>
+	 */
+	public Vaga getVaga() {
+
+		return vaga;
+	}
+
+	/**
+	 * Define o valor do atributo <code>vaga</code>.
+	 *
+	 * @param vaga
+	 */
+	public void setVaga(Vaga vaga) {
+
+		this.vaga = vaga;
 	}
 
 }
