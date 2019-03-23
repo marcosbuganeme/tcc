@@ -1,4 +1,4 @@
-Projeto em grupo (2 pessoas) da especialização do senac go
+Gerenciador de oportunidades de trabalho
 ===
 
 
