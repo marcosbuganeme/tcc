@@ -1,13 +1,12 @@
-tcc
+Projeto em grupo (2 pessoas) da especialização do senac go
 ===
 
-repositório do desenvolvimento do tcc da pós senac-go
 
-Tecnologias utilizadas
+<h3>Projeto obrigatoriamente deveria estar dentro da especificação JAVAEE 6</h3>
 
-1. JPA - para mapeamento de dados
-2. JSF - ciclo de vida web
-3. Hibernate - consulta de dados
-4. CDI - injeção de dependências
-5. Maven - gerenciamento de dependências de bibliotecas
-6. Jenkins - versionamento de código / integração contínua.
+<h6>JPA/Hibernate</h6>
+<h6>JSF (front)</h6>
+<h6>CDI</h6>
+<h6>Maven</h6>
+<h6>Jenkins</h6>
+<h6>Nexus</h6>
